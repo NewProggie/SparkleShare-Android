@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, SetupActivity!</string>
     <string name="app_name">SparkleShare-Android</string>
+    <string name="server_address">Server adress</string>
+    <string name="folder_name">Folder name</string>
+    <string name="email_address">Email adress</string>
+    <string name="password">Password</string>
 </resources>
