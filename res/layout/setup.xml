@@ -4,16 +4,14 @@
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:padding="10dip"
->
+	android:padding="10dip">
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_alignParentLeft="true"
 		android:layout_width="match_parent"
 		android:id="@+id/tv_server"
-		android:text="@string/server_address"
-	></TextView>
+		android:text="@string/server_address" />
 	<EditText
 		android:inputType="textEmailAddress"
 		android:layout_height="wrap_content"
@@ -21,27 +19,21 @@
 		android:layout_alignLeft="@+id/tv_server"
 		android:layout_width="match_parent"
 		android:id="@+id/edt_server"
-		android:hint="@string/server_adress_hint"
-	>
-	</EditText>
+		android:hint="@string/server_adress_hint" android:singleLine="true" android:lines="1"/>
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/edt_server"
 		android:layout_alignLeft="@+id/edt_server"
 		android:id="@+id/tv_folder"
 		android:text="@string/folder_name"
-		android:layout_width="match_parent"
-	></TextView>
+		android:layout_width="match_parent"/>
 	<EditText
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_folder"
 		android:layout_alignLeft="@+id/tv_folder"
 		android:layout_width="match_parent"
 		android:id="@+id/edt_folder_name"
-		android:hint="@string/folder_name_hint"
-	>
-		<requestFocus></requestFocus>
-	</EditText>
+		android:hint="@string/folder_name_hint" android:singleLine="true"/>
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/edt_folder_name"
@@ -57,7 +49,7 @@
 		android:layout_alignLeft="@+id/tv_link_code"
 		android:layout_width="match_parent"
 		android:id="@+id/edt_link_code"
-	></EditText>
+	android:singleLine="true"></EditText>
 	<Button
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"

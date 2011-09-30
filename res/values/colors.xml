@@ -7,4 +7,7 @@
 	<color name="actionbar_text">#FFFFFF</color>
 	<color name="actionbar_text_shadow">#000000</color>
 	
+	<color name="actionbar_grad_start">#F17D00</color>
+	<color name="actionbar_grad_end">#FAB220</color>
+	
 </resources>
