@@ -20,5 +20,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".SettingsActivity" />
+		<activity android:name=".BrowsingActivity" />
 	</application>
 </manifest>

@@ -26,6 +26,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
@@ -34,6 +35,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SetupActivity extends Activity {
 	
@@ -128,8 +130,14 @@ public class SetupActivity extends Activity {
     	}
     	
     	@Override
-    	protected void onPostExecute(Boolean result) {
+    	protected void onPostExecute(Boolean successfully) {
     		loadingDialog.dismiss();
+    		if (successfully) {
+    			Intent browseData = new Intent(context, BrowsingActivity.class);
+    			startActivity(browseData);
+    		} else {
+    			Toast.makeText(context, getString(R.string.login_error), Toast.LENGTH_SHORT).show();
+    		}
     	}
     }
 }

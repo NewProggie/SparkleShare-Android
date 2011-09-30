@@ -11,4 +11,5 @@
     <string name="link_code">Linkcode</string>
     <string name="submit">submit</string>
     <string name="please_wait">Please wait...</string>
+    <string name="login_error">Login error</string>
 </resources>
