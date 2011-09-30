@@ -110,8 +110,6 @@ public class SetupActivity extends Activity {
 					editor.putString("ident", ident);
 					editor.putString("authCode", authCode);
 					editor.commit();
-					String exists = prefs.getString("ident", "none");
-					Log.d("exists", exists);
 				}
 			} catch (UnsupportedEncodingException e) {
 				Log.e("Login failed", e.getLocalizedMessage());
