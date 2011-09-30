@@ -58,4 +58,13 @@
 		android:layout_width="match_parent"
 		android:id="@+id/edt_link_code"
 	></EditText>
+	<Button
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:layout_width="match_parent"
+		android:text="@string/submit"
+		android:onClick="buttonClick"
+		android:id="@+id/btn_submit"
+	></Button>
 </RelativeLayout>
