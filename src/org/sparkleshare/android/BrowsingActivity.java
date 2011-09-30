@@ -25,4 +25,6 @@ public class BrowsingActivity extends BaseActivity {
 		
 		setContentView(lv_browsing);
 	}
+	
+	
 }
