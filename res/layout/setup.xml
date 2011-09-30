@@ -1,51 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" 
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:padding="10dip">
-	<TextView 
-		android:id="@+id/text_server_address"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/server_address" />
-	<EditText
-		android:id="@+id/edit_server_address"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:layout_below="@id/text_server_address"/>
-	<TextView 
-		android:id="@+id/text_folder_name"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/folder_name" 
-		android:layout_below="@+id/edit_server_address" />
-	<EditText
-		android:id="@+id/edit_folder_name"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:layout_below="@+id/text_folder_name" />
+	android:padding="10dip"
+>
 	<TextView
-		android:id="@+id/text_email_address"
-		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="@string/email_address"
-		android:layout_below="@+id/edit_folder_name" />
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:layout_width="match_parent"
+		android:id="@+id/tv_server"
+		android:text="@string/server_address"
+	></TextView>
 	<EditText
-		android:id="@+id/edit_email_address"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:layout_below="@+id/text_email_address" />
+		android:inputType="textEmailAddress"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/tv_server"
+		android:layout_alignLeft="@+id/tv_server"
+		android:layout_width="match_parent"
+		android:id="@+id/edt_server"
+		android:hint="@string/server_adress_hint"
+	>
+	</EditText>
 	<TextView
-		android:id="@+id/text_password"
-		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="@string/password"
-		android:layout_below="@+id/edit_email_address" />
+		android:layout_below="@+id/edt_server"
+		android:layout_alignLeft="@+id/edt_server"
+		android:id="@+id/tv_folder"
+		android:text="@string/folder_name"
+		android:layout_width="match_parent"
+	></TextView>
 	<EditText
-		android:id="@+id/edit_password"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/tv_folder"
+		android:layout_alignLeft="@+id/tv_folder"
+		android:layout_width="match_parent"
+		android:id="@+id/edt_folder_name"
+		android:hint="@string/folder_name_hint"
+	>
+		<requestFocus></requestFocus>
+	</EditText>
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/edt_folder_name"
+		android:layout_alignLeft="@+id/edt_folder_name"
+		android:layout_width="match_parent"
+		android:id="@+id/tv_link_code"
+		android:text="@string/link_code"
+	></TextView>
+	<EditText
 		android:inputType="textPassword"
-		android:layout_below="@+id/text_password" />
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/tv_link_code"
+		android:layout_alignLeft="@+id/tv_link_code"
+		android:layout_width="match_parent"
+		android:id="@+id/edt_link_code"
+	></EditText>
 </RelativeLayout>
