@@ -12,4 +12,7 @@
     <string name="submit">submit</string>
     <string name="please_wait">Please wait...</string>
     <string name="login_error">Login error</string>
+    
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
 </resources>
