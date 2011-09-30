@@ -25,7 +25,9 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,6 +103,13 @@ public class SetupActivity extends Activity {
 					// TODO: encrypt credentials 
 					String ident = credentials.getString("ident");
 					String authCode = credentials.getString("authCode");
+					SharedPreferences prefs = SettingsActivity.getSettings((ContextWrapper) context);
+					Editor editor  = prefs.edit();
+					editor.putString("ident", ident);
+					editor.putString("authCode", authCode);
+					editor.commit();
+					String exists = prefs.getString("ident", "none");
+					Log.d("exists", exists);
 				}
 			} catch (UnsupportedEncodingException e) {
 				Log.e("Login failed", e.getLocalizedMessage());
