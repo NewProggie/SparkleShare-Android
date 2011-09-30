@@ -7,8 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -18,26 +16,27 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.sparkleshare.android.ui.BaseActivity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SetupActivity extends Activity {
+public class SetupActivity extends BaseActivity {
 	
 	private EditText edtServer, edtFolder, edtLinkcode;
 	private Button btnSubmit;
@@ -48,6 +47,14 @@ public class SetupActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setup);
+        setupActionBar(null, Color.BLACK);
+        addNewActionButton(R.drawable.icon, R.string.info, new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO: Create info on how to use it
+			}
+		});
         context = this;
         
         edtServer = (EditText) findViewById(R.id.edt_server);
