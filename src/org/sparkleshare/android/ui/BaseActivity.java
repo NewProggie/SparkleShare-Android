@@ -1,6 +1,7 @@
 package org.sparkleshare.android.ui;
 
 import org.sparkleshare.android.R;
+import org.sparkleshare.android.SettingsActivity;
 import org.sparkleshare.android.SetupActivity;
 
 import android.app.Activity;
@@ -218,6 +219,10 @@ public class BaseActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.opt_settings:
+			Intent settings = new Intent(this, SettingsActivity.class);
+			startActivity(settings);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
