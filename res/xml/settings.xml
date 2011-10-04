@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="@string/sparkleshare_account">
+		<Preference
+			android:key="@string/settings_release_account"
+			android:title="@string/settings_release_account" />
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/info">
+		<Preference 
+			android:key="@string/app_version"
+			android:title="@string/app_version"
+			android:enabled="false"
+			android:summary="0.1"/>
+	</PreferenceCategory>
 </PreferenceScreen>

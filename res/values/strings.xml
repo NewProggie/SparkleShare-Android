@@ -16,4 +16,7 @@
     <string name="home">Home</string>
     <string name="settings">Settings</string>
     <string name="info">Info</string>
+    <string name="sparkleshare_account">SparkleShare-Account</string>
+    <string name="settings_release_account">Release account</string>
+    <string name="app_version">App-Version</string>
 </resources>
