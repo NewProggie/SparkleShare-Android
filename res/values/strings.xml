@@ -3,12 +3,12 @@
     <string name="app_name">SparkleShare-Android</string>
     <string name="server_address">Server:</string>
     <string name="server_adress_hint">http://user@server:port</string>
-    <string name="folder_name">Folder name</string>
+    <string name="folder_name">Folder name:</string>
     <string name="folder_name_hint">/home/user/repositoryname.git</string>
     <string name="email_address">Email adress</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="link_code">Linkcode</string>
+    <string name="link_code">Linkcode:</string>
     <string name="submit">submit</string>
     <string name="please_wait">Please wait...</string>
     <string name="login_error">Login error</string>

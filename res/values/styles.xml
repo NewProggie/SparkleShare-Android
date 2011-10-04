@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="ApplicationStyle" parent="@android:style/Theme.NoTitleBar">
+    	<item name="actionbarSeparatorStyle">@style/ActionBarSeparator</item>
+    	<item name="actionbarTextStyle">@style/ActionBarText</item>
+    	<item name="actionbarButtonStyle">@style/ActionBarButton</item>
     </style>
     <style name="ActionBar">
     	<item name="android:layout_width">fill_parent</item>

@@ -39,6 +39,7 @@ import android.widget.Toast;
 public class SetupActivity extends BaseActivity {
 	
 	private EditText edtServer, edtFolder, edtLinkcode;
+	@SuppressWarnings("unused")
 	private Button btnSubmit;
 	private Context context;
 	
@@ -46,6 +47,15 @@ public class SetupActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        SharedPreferences prefs = SettingsActivity.getSettings(this);
+        if (prefs.contains("ident")) {
+        	Intent browseData = new Intent(this, BrowsingActivity.class);
+			String serverUrl = prefs.getString("serverUrl", "");
+			browseData.putExtra("url", serverUrl + "/api/getFolderList");
+			startActivity(browseData);
+        }
+        
         setContentView(R.layout.setup);
         setupActionBar(null, Color.BLACK);
         addNewActionButton(R.drawable.icon, R.string.info, new OnClickListener() {
@@ -81,8 +91,9 @@ public class SetupActivity extends BaseActivity {
      */
     private class Login extends AsyncTask<Void, Void, Boolean> {
     	
-    	ProgressDialog loadingDialog;
-    	final String AUTH_SUFFIX = "/api/getAuthCode";
+    	private ProgressDialog loadingDialog;
+    	private final String AUTH_SUFFIX = "/api/getAuthCode";
+    	private String serverUrl;
     	
     	@Override
     	protected void onPreExecute() {
@@ -92,8 +103,8 @@ public class SetupActivity extends BaseActivity {
     	@Override
     	protected Boolean doInBackground(Void... params) {
     		HttpClient client = new DefaultHttpClient();
-    		String address = edtServer.getText().toString();
-    		HttpPost post = new HttpPost(address + AUTH_SUFFIX);
+    		serverUrl = edtServer.getText().toString();
+    		HttpPost post = new HttpPost(serverUrl + AUTH_SUFFIX);
     		try {
     			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         		nameValuePairs.add(new BasicNameValuePair("code", edtLinkcode.getText().toString()));
@@ -116,6 +127,7 @@ public class SetupActivity extends BaseActivity {
 					Editor editor  = prefs.edit();
 					editor.putString("ident", ident);
 					editor.putString("authCode", authCode);
+					editor.putString("serverUrl", serverUrl);
 					editor.commit();
 				}
 			} catch (UnsupportedEncodingException e) {
@@ -139,6 +151,8 @@ public class SetupActivity extends BaseActivity {
     		loadingDialog.dismiss();
     		if (successfully) {
     			Intent browseData = new Intent(context, BrowsingActivity.class);
+    			// TODO: outsource API constants
+    			browseData.putExtra("url", serverUrl + "/api/getFolderList");
     			startActivity(browseData);
     		} else {
     			Toast.makeText(context, getString(R.string.login_error), Toast.LENGTH_SHORT).show();

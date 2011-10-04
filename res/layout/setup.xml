@@ -9,7 +9,7 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_alignParentLeft="true"
-		android:layout_width="match_parent"
+		android:layout_width="fill_parent"
 		android:id="@+id/tv_server"
 		android:text="@string/server_address" />
 	<EditText
@@ -17,46 +17,47 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_server"
 		android:layout_alignLeft="@+id/tv_server"
-		android:layout_width="match_parent"
+		android:layout_width="fill_parent"
 		android:id="@+id/edt_server"
-		android:hint="@string/server_adress_hint" android:singleLine="true" android:lines="1"/>
+		android:hint="@string/server_adress_hint"
+		android:singleLine="true"
+		android:lines="1" />
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/edt_server"
 		android:layout_alignLeft="@+id/edt_server"
 		android:id="@+id/tv_folder"
 		android:text="@string/folder_name"
-		android:layout_width="match_parent"/>
+		android:layout_width="fill_parent" />
 	<EditText
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_folder"
 		android:layout_alignLeft="@+id/tv_folder"
-		android:layout_width="match_parent"
+		android:layout_width="fill_parent"
 		android:id="@+id/edt_folder_name"
-		android:hint="@string/folder_name_hint" android:singleLine="true"/>
+		android:hint="@string/folder_name_hint"
+		android:singleLine="true" />
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/edt_folder_name"
 		android:layout_alignLeft="@+id/edt_folder_name"
-		android:layout_width="match_parent"
+		android:layout_width="fill_parent"
 		android:id="@+id/tv_link_code"
-		android:text="@string/link_code"
-	></TextView>
+		android:text="@string/link_code"></TextView>
 	<EditText
 		android:inputType="textPassword"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_link_code"
 		android:layout_alignLeft="@+id/tv_link_code"
-		android:layout_width="match_parent"
+		android:layout_width="fill_parent"
 		android:id="@+id/edt_link_code"
-	android:singleLine="true"></EditText>
+		android:singleLine="true"></EditText>
 	<Button
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"
-		android:layout_width="match_parent"
+		android:layout_width="fill_parent"
 		android:text="@string/submit"
 		android:onClick="buttonClick"
-		android:id="@+id/btn_submit"
-	></Button>
+		android:id="@+id/btn_submit"></Button>
 </RelativeLayout>
