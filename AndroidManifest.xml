@@ -21,5 +21,6 @@
 		</activity>
 		<activity android:name=".SettingsActivity" />
 		<activity android:name=".BrowsingActivity" />
+		<activity android:name=".InfoActivity" />
 	</application>
 </manifest>

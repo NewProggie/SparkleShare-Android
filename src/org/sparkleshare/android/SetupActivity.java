@@ -47,6 +47,7 @@ public class SetupActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         
         SharedPreferences prefs = SettingsActivity.getSettings(this);
         if (prefs.contains("ident")) {
@@ -62,10 +63,10 @@ public class SetupActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO: Create info on how to use it
+				Intent showInfo = new Intent(context, InfoActivity.class);
+				startActivity(showInfo);
 			}
 		});
-        context = this;
         
         edtServer = (EditText) findViewById(R.id.edt_server);
         edtFolder = (EditText) findViewById(R.id.edt_folder_name);
