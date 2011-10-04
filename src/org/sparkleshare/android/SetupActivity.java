@@ -58,7 +58,7 @@ public class SetupActivity extends BaseActivity {
         
         setContentView(R.layout.setup);
         setupActionBar(null, Color.BLACK);
-        addNewActionButton(R.drawable.icon, R.string.info, new OnClickListener() {
+        addNewActionButton(R.drawable.ic_action_info, R.string.info, new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
