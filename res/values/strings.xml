@@ -20,4 +20,8 @@
     <string name="settings_release_account">Release account</string>
     <string name="app_version">App-Version</string>
     <string name="input_linkcode">Insert linkcode</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="release_account_hint">Do you want to release the current account from this device?</string>
+    <string name="release">Release</string>
+    <string name="cancel">Cancel</string>
 </resources>
