@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/grey_gradient">
+	<ImageView 
+		android:src="@drawable/sparkleshare_logo" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+	<TextView style="@style/SplashText" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="SparkleShare-Android"
+		/>
+	<Button 
+		android:id="@+id/btn_insert_linkcode" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="4dp"
+		android:text="@string/input_linkcode"/>
+</LinearLayout>
