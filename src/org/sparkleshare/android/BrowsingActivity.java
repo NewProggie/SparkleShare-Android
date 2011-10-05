@@ -31,6 +31,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,13 +78,22 @@ public class BrowsingActivity extends BaseActivity {
 					browseFolder.putExtra("url", serverUrl + "/api/getFolderContent/" + current.getId());
 					startActivity(browseFolder);
 				} else if (current.getType().equals("file")) {
-					StringBuilder sb = new StringBuilder();
-					sb.append(serverUrl);
-					sb.append("/api/getFile/");
-					sb.append(current.getId() + "?");
-					sb.append(current.getUrl());
-					current.setUrl(sb.toString());
-					new DownloadFile().execute(current);
+					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+					if (file.exists()) {
+						Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getAbsolutePath()));
+						open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						open.setAction(android.content.Intent.ACTION_VIEW);
+						open.setData(Uri.fromFile(file));
+						startActivity(open);
+					} else {
+						StringBuilder sb = new StringBuilder();
+						sb.append(serverUrl);
+						sb.append("/api/getFile/");
+						sb.append(current.getId() + "?");
+						sb.append(current.getUrl());
+						current.setUrl(sb.toString());
+						new DownloadFile().execute(current);
+					}
 				}
 				
 			}
