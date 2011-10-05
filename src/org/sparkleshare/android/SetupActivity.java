@@ -48,17 +48,15 @@ public class SetupActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-        
-        SharedPreferences prefs = SettingsActivity.getSettings(this);
-        if (prefs.contains("ident")) {
-        	Intent browseData = new Intent(this, BrowsingActivity.class);
-			String serverUrl = prefs.getString("serverUrl", "");
-			browseData.putExtra("url", serverUrl + "/api/getFolderList");
-			startActivity(browseData);
-        }
-        
         setContentView(R.layout.setup);
-        setupActionBar(null, Color.BLACK);
+        
+        edtServer = (EditText) findViewById(R.id.edt_server);
+        edtFolder = (EditText) findViewById(R.id.edt_folder_name);
+        edtLinkcode = (EditText) findViewById(R.id.edt_link_code);
+        btnSubmit = (Button) findViewById(R.id.btn_submit);
+        
+        
+        setupActionBar("SparkleShare-Login", Color.BLACK);
         addNewActionButton(R.drawable.ic_action_info, R.string.info, new OnClickListener() {
 			
 			@Override
@@ -68,10 +66,6 @@ public class SetupActivity extends BaseActivity {
 			}
 		});
         
-        edtServer = (EditText) findViewById(R.id.edt_server);
-        edtFolder = (EditText) findViewById(R.id.edt_folder_name);
-        edtLinkcode = (EditText) findViewById(R.id.edt_link_code);
-        btnSubmit = (Button) findViewById(R.id.btn_submit);
     }
     
     /**
@@ -81,7 +75,8 @@ public class SetupActivity extends BaseActivity {
     public void buttonClick(View target) {
     	switch (target.getId()) {
     	case R.id.btn_submit:
-    		new Login().execute();
+    		new Login().execute(edtServer.getEditableText().toString());
+    		break;
     	}
     }
     
@@ -90,7 +85,7 @@ public class SetupActivity extends BaseActivity {
      * @author kai
      *
      */
-    private class Login extends AsyncTask<Void, Void, Boolean> {
+    private class Login extends AsyncTask<String, Void, Boolean> {
     	
     	private ProgressDialog loadingDialog;
     	private final String AUTH_SUFFIX = "/api/getAuthCode";
@@ -102,9 +97,9 @@ public class SetupActivity extends BaseActivity {
     	}
     	
     	@Override
-    	protected Boolean doInBackground(Void... params) {
+    	protected Boolean doInBackground(String... params) {
     		HttpClient client = new DefaultHttpClient();
-    		serverUrl = edtServer.getText().toString();
+    		serverUrl = params[0];
     		HttpPost post = new HttpPost(serverUrl + AUTH_SUFFIX);
     		try {
     			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();

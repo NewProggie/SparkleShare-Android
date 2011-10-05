@@ -1,9 +1,11 @@
 package org.sparkleshare.android;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 /**
  * Splash {@link Activity} which will be shown to user when no previously saved credentials could be found.
@@ -12,10 +14,13 @@ import android.os.Bundle;
  * 
  */
 public class SplashActivity extends Activity {
+	
+	private Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context = this;
 		setContentView(R.layout.splash);
 		
 		/* Found credentials, forwarding to BrowsingActivity */
@@ -26,6 +31,15 @@ public class SplashActivity extends Activity {
 			browseData.putExtra("url", serverUrl + "/api/getFolderList");
 			startActivity(browseData);
 			this.finish();
+		}
+	}
+	
+	public void buttonClick(View target) {
+		switch (target.getId()) {
+		case R.id.btn_insert_linkcode:
+			Intent setup = new Intent(context, SetupActivity.class);
+			startActivity(setup);
+			
 		}
 	}
 

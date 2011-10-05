@@ -32,6 +32,7 @@ public class BrowsingAdapter extends BaseAdapter {
 		items.add(entry);
 		notifyDataSetChanged();
 	}
+	
 	@Override
 	public Object getItem(int position) {
 		return items.get(position);
@@ -59,15 +60,14 @@ public class BrowsingAdapter extends BaseAdapter {
 		ListEntryItem item = items.get(position);
 		viewHolder.title.setText(item.getTitle());
 		viewHolder.subtitle.setText(item.getSubtitle());
-		viewHolder.icon.setTag(item.getIconUrl());
-		BitmapManager.INSTANCE.loadBitmap(item.getIconUrl(), viewHolder.icon, pixelToDp(context, 80), pixelToDp(context, 54));
+		if (item.getType().equals("file")) {
+			viewHolder.icon.setImageResource(R.drawable.icon);
+		} else if (item.getType().equals("dir")) {
+			viewHolder.icon.setImageResource(R.drawable.icon);
+		}
 		return view;
 	}
 
-	private int pixelToDp(Context context, int value) {
-		final float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (value * scale + 0.5f);
-	}
 
 	private class Viewholder {
 		TextView title, subtitle;
