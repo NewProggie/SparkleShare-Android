@@ -6,7 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.URLConnection;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -75,9 +77,10 @@ public class BrowsingActivity extends BaseActivity {
 					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
 					if (file.exists()) {
 						Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getAbsolutePath()));
+						String mime = URLConnection.guessContentTypeFromName(file.getAbsolutePath());
 						open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						open.setAction(android.content.Intent.ACTION_VIEW);
-						open.setData(Uri.fromFile(file));
+						open.setDataAndType((Uri.fromFile(file)), mime);
 						startActivity(open);
 					} else {
 						StringBuilder sb = new StringBuilder();
@@ -106,7 +109,6 @@ public class BrowsingActivity extends BaseActivity {
 		@Override
 		protected Boolean doInBackground(ListEntryItem... params) {
 			ListEntryItem current = params[0];
-			int count;
 			try {
 				HttpClient client = new DefaultHttpClient();
 				HttpGet get = new HttpGet(serverUrl);
@@ -114,16 +116,13 @@ public class BrowsingActivity extends BaseActivity {
 				get.setHeader("X-SPARKLE-AUTH", authCode);
 				HttpResponse response = client.execute(get);
 				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
-					BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());	
 					OutputStream out = new FileOutputStream(file);
-					
-					while ((count = in.read()) != -1) {
-						out.write(count);
-					}
+					HttpEntity entity = response.getEntity();
+					entity.writeTo(out);
+					entity.consumeContent();
 					out.flush();
 					out.close();
-					in.close();
 				}
 			} catch (ClientProtocolException e) {
 				Log.e("DownloadFile", e.getLocalizedMessage());
