@@ -26,21 +26,6 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/edt_server"
 		android:layout_alignLeft="@+id/edt_server"
-		android:id="@+id/tv_folder"
-		android:text="@string/folder_name"
-		android:layout_width="fill_parent" />
-	<EditText
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/tv_folder"
-		android:layout_alignLeft="@+id/tv_folder"
-		android:layout_width="fill_parent"
-		android:id="@+id/edt_folder_name"
-		android:hint="@string/folder_name_hint"
-		android:singleLine="true" />
-	<TextView
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/edt_folder_name"
-		android:layout_alignLeft="@+id/edt_folder_name"
 		android:layout_width="fill_parent"
 		android:id="@+id/tv_link_code"
 		android:text="@string/link_code"></TextView>

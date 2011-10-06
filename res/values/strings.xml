@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">SparkleShare-Android</string>
     <string name="server_address">Server:</string>
-    <string name="server_adress_hint">http://user@server:port</string>
+    <string name="server_adress_hint">http://server:port</string>
     <string name="folder_name">Folder name:</string>
     <string name="folder_name_hint">/home/user/repositoryname.git</string>
     <string name="email_address">Email adress</string>

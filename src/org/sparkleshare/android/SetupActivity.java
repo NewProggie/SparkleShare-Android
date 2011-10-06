@@ -38,7 +38,7 @@ import android.widget.Toast;
 
 public class SetupActivity extends BaseActivity {
 	
-	private EditText edtServer, edtFolder, edtLinkcode;
+	private EditText edtServer, edtLinkcode;
 	@SuppressWarnings("unused")
 	private Button btnSubmit;
 	private Context context;
@@ -51,7 +51,6 @@ public class SetupActivity extends BaseActivity {
         setContentView(R.layout.setup);
         
         edtServer = (EditText) findViewById(R.id.edt_server);
-        edtFolder = (EditText) findViewById(R.id.edt_folder_name);
         edtLinkcode = (EditText) findViewById(R.id.edt_link_code);
         btnSubmit = (Button) findViewById(R.id.btn_submit);
         

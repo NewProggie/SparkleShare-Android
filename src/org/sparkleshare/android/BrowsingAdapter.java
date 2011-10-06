@@ -3,7 +3,6 @@ package org.sparkleshare.android;
 import java.util.ArrayList;
 
 import org.sparkleshare.android.ui.ListEntryItem;
-import org.sparkleshare.android.utils.BitmapManager;
 
 import android.content.Context;
 import android.view.LayoutInflater;
