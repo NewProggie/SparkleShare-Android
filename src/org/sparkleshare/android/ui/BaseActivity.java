@@ -1,11 +1,13 @@
 package org.sparkleshare.android.ui;
 
+import org.sparkleshare.android.BrowsingActivity;
 import org.sparkleshare.android.R;
 import org.sparkleshare.android.SettingsActivity;
 import org.sparkleshare.android.SetupActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -197,8 +199,12 @@ public class BaseActivity extends Activity {
 	 * {@link MainActivity }.
 	 */
 	private void backToMain() {
-		Intent intent = new Intent(this, SetupActivity.class);
+		SharedPreferences prefs = SettingsActivity.getSettings(this);
+		String serverUrl = prefs.getString("serverUrl", "") + "/api/getFolderList";
+		
+		Intent intent = new Intent(this, BrowsingActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("url", serverUrl);
 		startActivity(intent);
 	}
 	
