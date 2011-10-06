@@ -32,15 +32,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class SetupActivity extends BaseActivity {
 	
 	private EditText edtServer, edtLinkcode;
-	@SuppressWarnings("unused")
-	private Button btnSubmit;
 	private Context context;
 	
     /** Called when the activity is first created. */
@@ -52,8 +49,6 @@ public class SetupActivity extends BaseActivity {
         
         edtServer = (EditText) findViewById(R.id.edt_server);
         edtLinkcode = (EditText) findViewById(R.id.edt_link_code);
-        btnSubmit = (Button) findViewById(R.id.btn_submit);
-        
         
         setupActionBar("SparkleShare-Login", Color.BLACK);
         addNewActionButton(R.drawable.ic_action_info, R.string.info, new OnClickListener() {
@@ -64,6 +59,15 @@ public class SetupActivity extends BaseActivity {
 				startActivity(showInfo);
 			}
 		});
+        
+        if (getIntent().getStringExtra("url") != null) {
+        	/* processing scanned QR code */
+        	String url = getIntent().getStringExtra("url");
+        	String linkcode = getIntent().getStringExtra("linkcode");
+        	edtServer.setText(url);
+        	edtLinkcode.setText(linkcode);
+        	new Login().execute(url);
+        }
         
     }
     
@@ -84,7 +88,7 @@ public class SetupActivity extends BaseActivity {
      * @author kai
      *
      */
-    private class Login extends AsyncTask<String, Void, Boolean> {
+    public class Login extends AsyncTask<String, Void, Boolean> {
     	
     	private ProgressDialog loadingDialog;
     	private final String AUTH_SUFFIX = "/api/getAuthCode";

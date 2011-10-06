@@ -19,7 +19,8 @@
     <string name="sparkleshare_account">SparkleShare-Account</string>
     <string name="settings_release_account">Release account</string>
     <string name="app_version">App-Version</string>
-    <string name="setup_account">Setup Account</string>
+    <string name="setup_account">Setup Account for this device</string>
+    <string name="scan_qrcode">Scan QR Code to link device</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="release_account_hint">Do you want to release the current account from this device?</string>
     <string name="release">Release</string>

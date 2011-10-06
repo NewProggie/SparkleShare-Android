@@ -1,11 +1,16 @@
 package org.sparkleshare.android;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * Splash {@link Activity} which will be shown to user when no previously saved credentials could be found.
@@ -16,12 +21,15 @@ import android.view.View;
 public class SplashActivity extends Activity {
 	
 	private Context context;
-
+	private Button btnScanQRCode;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
 		setContentView(R.layout.splash);
+		btnScanQRCode = (Button) findViewById(R.id.btn_scan_qrcode);
+		btnScanQRCode.setEnabled(isQRCodeAvailable(context));
 		
 		/* Found credentials, forwarding to BrowsingActivity */
 		SharedPreferences prefs = SettingsActivity.getSettings(this);
@@ -39,7 +47,35 @@ public class SplashActivity extends Activity {
 		case R.id.btn_insert_linkcode:
 			Intent setup = new Intent(context, SetupActivity.class);
 			startActivity(setup);
-			
+			break;
+		case R.id.btn_scan_qrcode:
+			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+	        intent.setPackage("com.google.zxing.client.android");
+	        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+	        startActivityForResult(intent, 0);
+	        break;
+		}
+	}
+	
+	private boolean isQRCodeAvailable(Context context) {
+		final PackageManager pManager = context.getPackageManager();
+		final Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+		List<ResolveInfo> list = pManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+		return list.size() > 0;
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 0) {
+			if (resultCode == RESULT_OK) {
+				String content = data.getStringExtra("SCAN_RESULT");
+				String url = content.split("SSHARE:")[1].split("#")[0];
+				String linkcode = content.split("#")[1];
+				Intent setup = new Intent(context, SetupActivity.class);
+				setup.putExtra("url", url);
+				setup.putExtra("linkcode", linkcode);
+				startActivity(setup);
+			} 
 		}
 	}
 

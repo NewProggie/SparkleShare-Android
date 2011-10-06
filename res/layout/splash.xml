@@ -8,7 +8,7 @@
 	<ImageView 
 		android:src="@drawable/sparkleshare_logo" 
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content" android:layout_marginTop="20dp"/>
 	<TextView style="@style/SplashText" 
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
@@ -22,4 +22,11 @@
 		android:layout_margin="4dp"
 		android:onClick="buttonClick"
 		android:text="@string/setup_account"/>
+	<Button 
+		android:id="@+id/btn_scan_qrcode"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="4dp"
+		android:onClick="buttonClick"
+		android:text="@string/scan_qrcode"/>
 </LinearLayout>
