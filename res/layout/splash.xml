@@ -21,5 +21,5 @@
 		android:layout_height="wrap_content"
 		android:layout_margin="4dp"
 		android:onClick="buttonClick"
-		android:text="@string/input_linkcode"/>
+		android:text="@string/setup_account"/>
 </LinearLayout>
