@@ -6,6 +6,7 @@
 	<color name="orange">#F57900</color>
 	<color name="transparent">#00000000</color>
 	<color name="half_transparent">#80FFFFFF</color>
+	<color name="half_transparent_black">#80000000</color>
 	
 	<color name="actionbar_text">#FFFFFF</color>
 	<color name="actionbar_text_shadow">#000000</color>

@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -37,46 +38,65 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-
+/**
+ * Activity for browsing content of a SparkleShare-Dashboard instance.
+ * @author kai
+ *
+ */
 public class BrowsingActivity extends BaseActivity {
 	
-	private ListView lv_browsing;
+	private ListView lvBrowsing;
 	private BrowsingAdapter adapter;
 	private Context context;
-	private String ident, authCode, serverUrl;
+	private String ident, authCode, serverUrl, folderId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
 		
-		lv_browsing = new ListView(context);
+		lvBrowsing = new ListView(context);
 		adapter = new BrowsingAdapter(context);
-		lv_browsing.setAdapter(adapter);
-		lv_browsing.setOnItemClickListener(onListItemClick());
-		setContentView(lv_browsing);
+		lvBrowsing.setAdapter(adapter);
+		lvBrowsing.setOnItemClickListener(onListItemClick());
+		setContentView(lvBrowsing);
+		
 		SharedPreferences prefs = SettingsActivity.getSettings((ContextWrapper) context);
 		ident = prefs.getString("ident", "");
 		authCode = prefs.getString("authCode", "");
 		serverUrl = prefs.getString("serverUrl", "");
+		folderId = prefs.getString("folderId", "");
+		
+		Log.d("folderId", folderId);
 		
 		String url = getIntent().getStringExtra("url");
 		new DownloadFileList().execute(url);
 	}
 	
+	/**
+	 * Will be called everytime an item on this activities' listview was clicked.
+	 * @return newly created {@link OnItemClickListener}
+	 */
 	private OnItemClickListener onListItemClick() {
 		OnItemClickListener listener = new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ListEntryItem current = (ListEntryItem) adapter.getItem(position);
+				
 				if (current.getType().equals("dir")) {
 					Intent browseFolder = new Intent(context, BrowsingActivity.class);
-					browseFolder.putExtra("url", serverUrl + "/api/getFolderContent/" + current.getId() + "?" + current.getUrl());
+					String tmpUrl = serverUrl + "/api/getFolderContent/" + folderId + "?" + current.getUrl();
+					browseFolder.putExtra("url", tmpUrl);
 					startActivity(browseFolder);
 				} else if (current.getType().equals("git")) {
 					Intent browseFolder = new Intent(context, BrowsingActivity.class);
-					browseFolder.putExtra("url", serverUrl + "/api/getFolderContent/" + current.getId());
+					folderId = current.getId();
+					SharedPreferences prefs = SettingsActivity.getSettings((ContextWrapper) parent.getContext());
+					Editor editor = prefs.edit();
+					editor.putString("folderId", folderId);
+					editor.commit();
+					browseFolder.putExtra("url", serverUrl + "/api/getFolderContent/" + folderId);
 					startActivity(browseFolder);
 				} else if (current.getType().equals("file")) {
 					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
@@ -166,6 +186,7 @@ public class BrowsingActivity extends BaseActivity {
 		@Override
 		protected Boolean doInBackground(String... params) {
 			String server = params[0];
+			
 			try {
 				// TODO: Refactor I/O here and in SetupActivity to central place
 				HttpClient client = new DefaultHttpClient();
