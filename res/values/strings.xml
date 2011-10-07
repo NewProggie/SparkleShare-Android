@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SparkleShare-Android</string>
-    <string name="server_address">Server:</string>
-    <string name="server_adress_hint">http://server:port</string>
+    <string name="host">Host</string>
+    <string name="host_hint">http://server:port</string>
     <string name="folder_name">Folder name:</string>
     <string name="folder_name_hint">/home/user/repositoryname.git</string>
     <string name="email_address">Email adress</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="link_code">Linkcode:</string>
+    <string name="link_code">Link code</string>
     <string name="submit">submit</string>
     <string name="please_wait">Please wait...</string>
     <string name="login_error">Login error</string>
@@ -26,4 +26,6 @@
     <string name="release">Release</string>
     <string name="cancel">Cancel</string>
     <string name="get_started">Get started by adding a project</string>
+    <string name="never_mind">Never mind</string>
+    <string name="add">Add</string>
 </resources>

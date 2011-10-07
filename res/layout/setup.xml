@@ -6,43 +6,58 @@
 	android:layout_height="fill_parent"
 	android:padding="10dip">
 	<TextView
+		style="@style/TextLabelSetupStyle"
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_alignParentLeft="true"
 		android:layout_width="fill_parent"
 		android:id="@+id/tv_server"
-		android:text="@string/server_address" />
+		android:text="@string/host" />
 	<EditText
 		android:inputType="textEmailAddress"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_server"
-		android:layout_alignLeft="@+id/tv_server"
 		android:layout_width="fill_parent"
 		android:id="@+id/edt_server"
-		android:hint="@string/server_adress_hint"
+		android:hint="@string/host_hint"
 		android:singleLine="true"
-		android:lines="1" />
+		android:lines="1"
+		android:layout_marginBottom="10dp" />
 	<TextView
+		style="@style/TextLabelSetupStyle"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/edt_server"
 		android:layout_alignLeft="@+id/edt_server"
 		android:layout_width="fill_parent"
 		android:id="@+id/tv_link_code"
-		android:text="@string/link_code"></TextView>
+		android:text="@string/link_code" />
 	<EditText
 		android:inputType="textPassword"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_link_code"
-		android:layout_alignLeft="@+id/tv_link_code"
 		android:layout_width="fill_parent"
 		android:id="@+id/edt_link_code"
 		android:singleLine="true"></EditText>
-	<Button
+	<LinearLayout
+		android:id="@+id/button_container"
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"
-		android:layout_width="fill_parent"
-		android:text="@string/submit"
-		android:onClick="buttonClick"
-		android:id="@+id/btn_submit"></Button>
+		android:orientation="horizontal"
+		android:layout_width="fill_parent">
+		<Button
+			android:layout_width="wrap_content"
+			android:id="@+id/btn_never_mind"
+			android:onClick="buttonClick"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/never_mind"></Button>
+		<Button
+			android:layout_width="wrap_content"
+			android:id="@+id/btn_add"
+			android:onClick="buttonClick"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/add"/>
+	</LinearLayout>
 </RelativeLayout>
