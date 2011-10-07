@@ -46,18 +46,14 @@
 		android:orientation="horizontal"
 		android:layout_width="fill_parent">
 		<Button
-			android:layout_width="wrap_content"
 			android:id="@+id/btn_never_mind"
 			android:onClick="buttonClick"
 			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="@string/never_mind"></Button>
+			android:text="@string/never_mind" android:layout_weight="1" android:layout_width="0dp" android:textColor="@color/grey"></Button>
 		<Button
-			android:layout_width="wrap_content"
 			android:id="@+id/btn_add"
 			android:onClick="buttonClick"
 			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="@string/add"/>
+			android:text="@string/add" android:layout_weight="1" android:layout_width="0dp" android:textColor="@color/grey"/>
 	</LinearLayout>
 </RelativeLayout>

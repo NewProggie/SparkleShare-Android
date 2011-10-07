@@ -54,6 +54,7 @@
 		<item name="android:shadowDx">1</item>
 		<item name="android:shadowDy">1</item>
 		<item name="android:shadowRadius">1</item>
+		<item name="android:textStyle">bold</item>
 		<item name="android:textColor">@color/white</item>
 		<item name="android:textSize">28dp</item>
 	</style>

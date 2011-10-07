@@ -8,14 +8,15 @@
 	<ImageView
 		android:src="@drawable/sparkleshare_logo"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="20dp" />
+		android:layout_height="wrap_content" />
 	<TextView
 		style="@style/SplashText"
+		android:text="@string/welcome_sparkleshare"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
+		android:paddingTop="0px"
 		android:layout_weight="1"
-		android:text="SparkleShare-Android" />
+		android:layout_height="fill_parent"
+		android:gravity="center_horizontal|top" />
 	<TextView
 		style="@style/GetStartedText"
 		android:text="@string/get_started"
@@ -25,16 +26,16 @@
 		android:gravity="center"></TextView>
 	<Button
 		android:layout_width="fill_parent"
-		android:layout_margin="4dp"
+		android:layout_margin="1dp"
 		android:id="@+id/btn_scan_qrcode"
 		android:onClick="buttonClick"
 		android:layout_height="wrap_content"
-		android:text="@string/scan_qrcode"></Button>
+		android:text="@string/scan_qrcode" android:textColor="@color/grey"></Button>
 	<Button
 		android:id="@+id/btn_insert_linkcode"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_margin="4dp"
+		android:layout_margin="1dp"
 		android:onClick="buttonClick"
-		android:text="@string/setup_account" />
+		android:text="@string/setup_account" android:textColor="@color/grey"/>
 </LinearLayout>

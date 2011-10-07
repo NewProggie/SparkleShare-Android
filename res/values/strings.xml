@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SparkleShare-Android</string>
+    <string name="welcome_sparkleshare">Welcome to SparkleShare!</string>
     <string name="host">Host</string>
     <string name="host_hint">http://server:port</string>
     <string name="folder_name">Folder name:</string>
@@ -12,6 +13,7 @@
     <string name="submit">submit</string>
     <string name="please_wait">Please wait...</string>
     <string name="login_error">Login error</string>
+    <string name="add_project">Add project</string>
     
     <string name="home">Home</string>
     <string name="settings">Settings</string>
@@ -20,12 +22,12 @@
     <string name="settings_release_account">Release account</string>
     <string name="app_version">App-Version</string>
     <string name="setup_account">Enter link code</string>
-    <string name="scan_qrcode">Scan QR Code</string>
+    <string name="scan_qrcode">Scan QR code</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="release_account_hint">Do you want to release the current account from this device?</string>
     <string name="release">Release</string>
     <string name="cancel">Cancel</string>
-    <string name="get_started">Get started by adding a project</string>
+    <string name="get_started">Get started by adding a project:</string>
     <string name="never_mind">Never mind</string>
     <string name="add">Add</string>
 </resources>

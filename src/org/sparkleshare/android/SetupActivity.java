@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class SetupActivity extends BaseActivity {
 	
 	private EditText edtServer, edtLinkcode;
 	private Context context;
+	private Button btn_add;
 	
     /** Called when the activity is first created. */
     @Override
@@ -47,19 +49,13 @@ public class SetupActivity extends BaseActivity {
         context = this;
         setContentView(R.layout.setup);
         
+        btn_add = (Button) findViewById(R.id.btn_add);
+        btn_add.setEnabled(false);
         edtServer = (EditText) findViewById(R.id.edt_server);
         edtLinkcode = (EditText) findViewById(R.id.edt_link_code);
         
-        setupActionBar("SparkleShare-Login", Color.BLACK);
-        addNewActionButton(R.drawable.ic_action_info, R.string.info, new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent showInfo = new Intent(context, InfoActivity.class);
-				startActivity(showInfo);
-			}
-		});
-        
+        setupActionBarWithoutHomeButton(getString(R.string.add_project), Color.BLACK);
+
         if (getIntent().getStringExtra("url") != null) {
         	/* processing scanned QR code */
         	String url = getIntent().getStringExtra("url");
@@ -77,7 +73,7 @@ public class SetupActivity extends BaseActivity {
      */
     public void buttonClick(View target) {
     	switch (target.getId()) {
-    	case R.id.btn_submit:
+    	case R.id.btn_add:
     		new Login().execute(edtServer.getEditableText().toString());
     		break;
     	}

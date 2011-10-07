@@ -1,5 +1,6 @@
 package org.sparkleshare.android;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -69,7 +70,11 @@ public class BrowsingActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ListEntryItem current = (ListEntryItem) adapter.getItem(position);
-				if (current.getType().equals("dir") || current.getType().equals("git")) {
+				if (current.getType().equals("dir")) {
+					Intent browseFolder = new Intent(context, BrowsingActivity.class);
+					browseFolder.putExtra("url", serverUrl + "/api/getFolderContent/" + current.getId() + "?" + current.getUrl());
+					startActivity(browseFolder);
+				} else if (current.getType().equals("git")) {
 					Intent browseFolder = new Intent(context, BrowsingActivity.class);
 					browseFolder.putExtra("url", serverUrl + "/api/getFolderContent/" + current.getId());
 					startActivity(browseFolder);
@@ -108,20 +113,20 @@ public class BrowsingActivity extends BaseActivity {
 		
 		@Override
 		protected Boolean doInBackground(ListEntryItem... params) {
+			// TODO: Check for connectivity
 			ListEntryItem current = params[0];
 			try {
 				HttpClient client = new DefaultHttpClient();
-				HttpGet get = new HttpGet(serverUrl);
+				HttpGet get = new HttpGet(current.getUrl());
+				Log.d("url", current.getUrl());
 				get.setHeader("X-SPARKLE-IDENT", ident);
 				get.setHeader("X-SPARKLE-AUTH", authCode);
-				HttpResponse response = client.execute(get);
-				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());	
-					OutputStream out = new FileOutputStream(file);
-					HttpEntity entity = response.getEntity();
+				HttpEntity entity = client.execute(get).getEntity();
+				if (entity != null) {
+					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+					OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
 					entity.writeTo(out);
 					entity.consumeContent();
-					out.flush();
 					out.close();
 				}
 			} catch (ClientProtocolException e) {

@@ -135,6 +135,42 @@ public class BaseActivity extends Activity {
 		
 	}
 	
+	protected void setupActionBarWithoutHomeButton(CharSequence title, int color) {
+		final ViewGroup actionBar = getActionBar();
+		if (actionBar == null) {
+			return;
+		}
+		
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.FILL_PARENT);
+		layoutParams.weight = 1;
+		
+		View.OnClickListener homeClickListener = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				backToMain();
+			}
+		};
+		
+		if (title != null) {
+			// adding title text
+			TextView titleText = new TextView(this, null, R.attr.actionbarTextStyle);
+			titleText.setLayoutParams(layoutParams);
+			titleText.setText(title);
+			actionBar.addView(titleText);
+		} else {
+			// adding app name
+			TextView appName = new TextView(this, null, R.attr.actionbarTextStyle);
+			appName.setText(getString(R.string.app_name));
+			actionBar.addView(appName);
+			
+			// adding layout for aligning items to the right
+			View dummy = new View(this);
+			dummy.setLayoutParams(layoutParams);
+			actionBar.addView(dummy);
+		}
+	}
+	
 	/**
 	 * Returns the {@link ViewGroup} for the actionbar. May return null.
 	 */
