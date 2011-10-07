@@ -38,15 +38,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+/**
+ * This {@link Activity} handles a new setup for a SparkleShare instance.
+ * @author kai
+ *
+ */
 public class SetupActivity extends BaseActivity {
 	
 	private EditText edtServer, edtLinkcode;
 	private Context context;
 	private Button btn_add;
 	
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +66,7 @@ public class SetupActivity extends BaseActivity {
         
         setupActionBarWithoutHomeButton(getString(R.string.add_project), Color.BLACK);
 
-        if (getIntent().getStringExtra("url") != null) {
+        if (getIntent().getStringExtra("url") != null && getIntent().getStringExtra("linkcode") != null) {
         	/* processing scanned QR code */
         	String url = getIntent().getStringExtra("url");
         	String linkcode = getIntent().getStringExtra("linkcode");
@@ -75,8 +78,8 @@ public class SetupActivity extends BaseActivity {
     }
     
     /**
-     * Will be invoked when submit button was clicked
-     * @param target
+     * Will be called when user clicks a button inside this {@link Activity }
+     * @param target clicked {@link Button}
      */
     public void buttonClick(View target) {
     	switch (target.getId()) {
@@ -89,6 +92,10 @@ public class SetupActivity extends BaseActivity {
     	}
     }
     
+    /**
+     * Checks both mandatory edit fields and enables the add button inside this Activity.
+     * @return
+     */
     private TextWatcher checkEditfields() {
     	TextWatcher watcher = new TextWatcher() {
 			
