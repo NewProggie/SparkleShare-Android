@@ -23,6 +23,7 @@ import org.sparkleshare.android.ui.BaseActivity;
 import org.sparkleshare.android.ui.ListEntryItem;
 import org.sparkleshare.android.utils.ExternalDirectory;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -47,7 +48,6 @@ public class BrowsingActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setupActionBar("SparkleShare", Color.WHITE);
 		context = this;
 		
 		lv_browsing = new ListView(context);
@@ -155,10 +155,12 @@ public class BrowsingActivity extends BaseActivity {
 	
 	private class DownloadFileList extends AsyncTask<String, ListEntryItem, Boolean> {
 		
+		private boolean isProjectsDirectory = false;
+		private ProgressDialog loadingDialog;
+		
 		@Override
 		protected void onPreExecute() {
-			// TODO: Progressdialog in action bar
-			super.onPreExecute();
+			loadingDialog = ProgressDialog.show(context, "", getString(R.string.please_wait));
 		}
 		
 		@Override
@@ -186,6 +188,10 @@ public class BrowsingActivity extends BaseActivity {
 						ListEntryItem item = new ListEntryItem();
 						item.setTitle(json.getString("name"));
 						item.setId(json.getString("id"));
+						String type = json.getString("type");
+						if (type.equals("git")) {
+							isProjectsDirectory = true;
+						}
 						item.setType(json.getString("type"));
 						if (json.has("url")) {
 							item.setUrl(json.getString("url"));
@@ -216,8 +222,12 @@ public class BrowsingActivity extends BaseActivity {
 		
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
+			loadingDialog.dismiss();
+			if (isProjectsDirectory) {
+				setupActionBar(getString(R.string.projects), Color.WHITE);
+			} else {
+				setupActionBar("SparkleShare", Color.WHITE);
+			}
 		}
 	}
 	
