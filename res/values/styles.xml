@@ -65,7 +65,7 @@
 		<item name="android:shadowDx">1</item>
 		<item name="android:shadowDy">1</item>
 		<item name="android:shadowRadius">1</item>
-		<item name="android:textColor">@color/white</item>
+		<item name="android:textColor">@color/half_transparent</item>
 		<item name="android:textSize">20dp</item>
 	</style>
 	<style name="TextLabelSetupStyle" parent="android:Widget.TextView">

@@ -21,18 +21,21 @@ import org.json.JSONObject;
 import org.sparkleshare.android.ui.BaseActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -54,6 +57,9 @@ public class SetupActivity extends BaseActivity {
         btn_add.setEnabled(false);
         edtServer = (EditText) findViewById(R.id.edt_server);
         edtLinkcode = (EditText) findViewById(R.id.edt_link_code);
+        
+        edtServer.addTextChangedListener(checkEditfields());
+        edtLinkcode.addTextChangedListener(checkEditfields());
         
         setupActionBarWithoutHomeButton(getString(R.string.add_project), Color.BLACK);
 
@@ -83,6 +89,27 @@ public class SetupActivity extends BaseActivity {
     	}
     }
     
+    private TextWatcher checkEditfields() {
+    	TextWatcher watcher = new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				if (edtServer.getEditableText().length() > 0 && edtLinkcode.getEditableText().length() > 0) {
+					btn_add.setEnabled(true);
+				} else {
+					btn_add.setEnabled(false);
+				}
+			}
+		};
+		return watcher;
+    }
+    
     /**
      * Login to server asynchronously. 
      * @author kai
@@ -96,7 +123,7 @@ public class SetupActivity extends BaseActivity {
     	
     	@Override
     	protected void onPreExecute() {
-    		loadingDialog = ProgressDialog.show(context, "", getString(R.string.please_wait));
+    		loadingDialog = ProgressDialog.show(context, "", getString(R.string.adding_project));
     	}
     	
     	@Override
@@ -154,7 +181,18 @@ public class SetupActivity extends BaseActivity {
     			browseData.putExtra("url", serverUrl + "/api/getFolderList");
     			startActivity(browseData);
     		} else {
-    			Toast.makeText(context, getString(R.string.login_error), Toast.LENGTH_SHORT).show();
+    			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    			builder.setMessage(getString(R.string.login_error))
+    				.setCancelable(false)
+    				.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							((Activity)context).finish();
+						}
+					});
+    			AlertDialog alert = builder.create();
+    			alert.show();
     		}
     	}
     }

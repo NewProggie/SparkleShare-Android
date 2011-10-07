@@ -25,12 +25,12 @@
 			android:layout_height="wrap_content" />
 	</LinearLayout>
 	<TextView
-		style="@style/GetStartedText"
 		android:text="@string/get_started"
 		android:id="@+id/textView1"
+		android:textColor="@color/half_transparent"
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
-		android:gravity="center"></TextView>
+		android:gravity="center" android:textSize="16dp" android:layout_marginBottom="10dp"></TextView>
 	<Button
 		android:layout_width="fill_parent"
 		android:layout_margin="1dp"

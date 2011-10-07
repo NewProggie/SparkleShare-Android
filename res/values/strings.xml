@@ -12,8 +12,10 @@
     <string name="link_code">Link code</string>
     <string name="submit">submit</string>
     <string name="please_wait">Please wait...</string>
-    <string name="login_error">Login error</string>
+    <string name="login_error">Sorry, but we weren\'t able to reach the host...</string>
+    <string name="close">Close</string>
     <string name="add_project">Add project</string>
+    <string name="adding_project">Adding project...</string>
     
     <string name="home">Home</string>
     <string name="settings">Settings</string>
