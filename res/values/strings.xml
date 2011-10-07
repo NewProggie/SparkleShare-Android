@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">SparkleShare-Android</string>
     <string name="welcome_sparkleshare">Welcome to SparkleShare!</string>
-    <string name="host">Host</string>
-    <string name="host_hint">http://server:port</string>
+    <string name="address">Address</string>
+    <string name="host_hint">domain name or IP address</string>
     <string name="folder_name">Folder name:</string>
     <string name="folder_name_hint">/home/user/repositoryname.git</string>
     <string name="email_address">Email adress</string>

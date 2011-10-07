@@ -4,19 +4,26 @@
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:background="@drawable/grey_gradient">
-	<ImageView
-		android:src="@drawable/sparkleshare_logo"
+	android:background="@color/orange">
+	<LinearLayout
+		android:id="@+id/dummy_container"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" />
-	<TextView
-		style="@style/SplashText"
-		android:text="@string/welcome_sparkleshare"
-		android:layout_width="fill_parent"
-		android:paddingTop="0px"
+		android:orientation="vertical"
 		android:layout_weight="1"
-		android:layout_height="fill_parent"
-		android:gravity="center_horizontal|top" />
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical">
+		<ImageView
+			android:src="@drawable/sparkleshare_logo"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" />
+		<TextView
+			style="@style/SplashText"
+			android:text="@string/welcome_sparkleshare"
+			android:layout_width="fill_parent"
+			android:paddingTop="0px"
+			android:gravity="center_horizontal|top"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
 	<TextView
 		style="@style/GetStartedText"
 		android:text="@string/get_started"
@@ -30,12 +37,14 @@
 		android:id="@+id/btn_scan_qrcode"
 		android:onClick="buttonClick"
 		android:layout_height="wrap_content"
-		android:text="@string/scan_qrcode" android:textColor="@color/grey"></Button>
+		android:text="@string/scan_qrcode"
+		android:textColor="@color/grey"></Button>
 	<Button
 		android:id="@+id/btn_insert_linkcode"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_margin="1dp"
 		android:onClick="buttonClick"
-		android:text="@string/setup_account" android:textColor="@color/grey"/>
+		android:text="@string/setup_account"
+		android:textColor="@color/grey" />
 </LinearLayout>

@@ -12,7 +12,7 @@
 		android:layout_alignParentLeft="true"
 		android:layout_width="fill_parent"
 		android:id="@+id/tv_server"
-		android:text="@string/host" />
+		android:text="@string/address" />
 	<EditText
 		android:inputType="textEmailAddress"
 		android:layout_height="wrap_content"

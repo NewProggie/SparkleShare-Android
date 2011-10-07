@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.sparkleshare.android.ui.BaseActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -75,6 +76,9 @@ public class SetupActivity extends BaseActivity {
     	switch (target.getId()) {
     	case R.id.btn_add:
     		new Login().execute(edtServer.getEditableText().toString());
+    		break;
+    	case R.id.btn_never_mind:
+    		((Activity) context).finish();
     		break;
     	}
     }
