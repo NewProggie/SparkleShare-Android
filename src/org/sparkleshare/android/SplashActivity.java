@@ -19,10 +19,10 @@ import android.widget.Button;
  * 
  */
 public class SplashActivity extends Activity {
-	
+
 	private Context context;
 	private Button btnScanQRCode;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,7 +30,7 @@ public class SplashActivity extends Activity {
 		setContentView(R.layout.splash);
 		btnScanQRCode = (Button) findViewById(R.id.btn_scan_qrcode);
 		btnScanQRCode.setEnabled(isQRCodeAvailable(context));
-		
+
 		/* Found credentials, forwarding to BrowsingActivity */
 		SharedPreferences prefs = SettingsActivity.getSettings(this);
 		if (prefs.contains("ident")) {
@@ -41,7 +41,12 @@ public class SplashActivity extends Activity {
 			this.finish();
 		}
 	}
-	
+
+	/**
+	 * Will be called when user clicks a button inside this {@link Activity}
+	 * 
+	 * @param target Button which was clicked by user
+	 */
 	public void buttonClick(View target) {
 		switch (target.getId()) {
 		case R.id.btn_insert_linkcode:
@@ -50,20 +55,25 @@ public class SplashActivity extends Activity {
 			break;
 		case R.id.btn_scan_qrcode:
 			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-	        intent.setPackage("com.google.zxing.client.android");
-	        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-	        startActivityForResult(intent, 0);
-	        break;
+			intent.setPackage("com.google.zxing.client.android");
+			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+			startActivityForResult(intent, 0);
+			break;
 		}
 	}
-	
+
+	/**
+	 * Checks for the barcode scanner app
+	 * @param context current context
+	 * @return true if barcode scanner app is installed on this device, else false
+	 */
 	private boolean isQRCodeAvailable(Context context) {
 		final PackageManager pManager = context.getPackageManager();
 		final Intent intent = new Intent("com.google.zxing.client.android.SCAN");
 		List<ResolveInfo> list = pManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 		return list.size() > 0;
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 0) {
@@ -75,7 +85,7 @@ public class SplashActivity extends Activity {
 				setup.putExtra("url", url);
 				setup.putExtra("linkcode", linkcode);
 				startActivity(setup);
-			} 
+			}
 		}
 	}
 
