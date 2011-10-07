@@ -1,10 +1,12 @@
 package org.sparkleshare.android;
 
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import org.sparkleshare.android.ui.ListEntryItem;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,10 +61,22 @@ public class BrowsingAdapter extends BaseAdapter {
 		ListEntryItem item = items.get(position);
 		viewHolder.title.setText(item.getTitle());
 		viewHolder.subtitle.setText(item.getSubtitle());
+		// TODO: Need to fix this crap here
 		if (item.getType().equals("file")) {
-			viewHolder.icon.setImageResource(R.drawable.icon);
+			String mime = URLConnection.guessContentTypeFromName(item.getTitle());
+			if (mime != null && mime.contains("image")) {
+				viewHolder.icon.setImageResource(R.drawable.ic_image);
+			} else if (mime != null && mime.contains("text")) {
+				viewHolder.icon.setImageResource(R.drawable.ic_document);
+			} else if (mime != null && mime.contains("audio")) {
+				viewHolder.icon.setImageResource(R.drawable.ic_audio);
+			} else {
+				viewHolder.icon.setImageResource(R.drawable.ic_application);
+			}
 		} else if (item.getType().equals("dir")) {
-			viewHolder.icon.setImageResource(R.drawable.icon);
+			viewHolder.icon.setImageResource(R.drawable.ic_folder);
+		} else if (item.getType().equals("git")) {
+			viewHolder.icon.setImageResource(R.drawable.ic_folder);
 		}
 		return view;
 	}
