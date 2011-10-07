@@ -225,6 +225,8 @@ public class BrowsingActivity extends BaseActivity {
 			loadingDialog.dismiss();
 			if (isProjectsDirectory) {
 				setupActionBar(getString(R.string.projects), Color.WHITE);
+				addNewActionButton(R.drawable.ic_title_info, R.string.info, null);
+				addNewActionButton(R.drawable.ic_title_add, R.string.add, null);
 			} else {
 				setupActionBar("SparkleShare", Color.WHITE);
 			}
