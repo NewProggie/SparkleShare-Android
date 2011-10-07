@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SparkleShare-Android</string>
+    <string name="app_name">SparkleShare</string>
     <string name="welcome_sparkleshare">Welcome to SparkleShare!</string>
     <string name="address">Address</string>
     <string name="host_hint">domain name or IP address</string>
