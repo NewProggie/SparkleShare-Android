@@ -190,6 +190,9 @@ public class BrowsingActivity extends BaseActivity {
 						if (json.has("url")) {
 							item.setUrl(json.getString("url"));
 						}
+						if (json.has("mimeBase")) {
+							item.setMimetype(json.getString("mimeBase"));
+						}
 						publishProgress(item);
 					}
 				}

@@ -113,8 +113,7 @@ public class BaseActivity extends Activity {
 		
 		if (title != null) {
 			// adding home button
-			// TODO: add nice home button instead of drawable.con
-			addActionButton(R.drawable.icon, R.string.home, homeClickListener, true);
+			addActionButton(R.drawable.ic_title_home, R.string.home, homeClickListener, true);
 			
 			// adding title text
 			TextView titleText = new TextView(this, null, R.attr.actionbarTextStyle);

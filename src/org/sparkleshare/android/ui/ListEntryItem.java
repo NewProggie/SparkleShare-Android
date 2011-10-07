@@ -9,7 +9,14 @@ public class ListEntryItem {
 	private String id;
 	private String type;
 	private String url;
+	private String mimetype;
 	
+	public String getMimetype() {
+		return mimetype;
+	}
+	public void setMimetype(String mimetype) {
+		this.mimetype = mimetype;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -45,10 +52,6 @@ public class ListEntryItem {
 	}
 	public void setIcon(Bitmap icon) {
 		this.icon = icon;
-	}
-	public String getIconUrl() {
-		// TODO Auto-generated method stub
-		return "";
 	}
 	
 }

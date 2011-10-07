@@ -3,29 +3,38 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:padding="5dp">
+	android:layout_height="48dp"
+	android:padding="10dp">
 	<ImageView
 		android:layout_width="wrap_content"
 		android:src="@drawable/icon"
-		android:layout_height="wrap_content"
-		android:layout_centerVertical="true"
-		android:layout_alignParentLeft="true"
-		android:id="@+id/list_item_icon"></ImageView>
+		android:layout_height="fill_parent"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentBottom="true"
+		android:id="@+id/list_item_icon"
+		android:layout_marginRight="10dp" />
+	<TextView
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="subtitle"
+		android:layout_height="26dp"
+		android:layout_toRightOf="@+id/list_item_icon"
+		android:id="@+id/list_item_subtitle"
+		android:layout_width="fill_parent" 
+		android:ellipsize="marquee"
+		android:lines="1"
+		android:layout_alignParentBottom="true" 
+		android:layout_alignParentRight="true" />
 	<TextView
 		android:textAppearance="?android:attr/textAppearanceMedium"
 		android:id="@+id/list_item_title"
-		android:text="TextView"
+		android:text="Title"
+		android:ellipsize="marquee"
+		android:lines="1"
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_toRightOf="@+id/list_item_icon"
-		android:layout_width="fill_parent"></TextView>
-	<TextView
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:text="TextView"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/list_item_title"
-		android:layout_toRightOf="@+id/list_item_icon"
-		android:id="@+id/list_item_subtitle"
-		android:layout_width="fill_parent"></TextView>
+		android:layout_width="fill_parent"
+		android:layout_alignParentRight="true"
+		android:layout_alignWithParentIfMissing="true"
+		android:gravity="center_vertical" />
 </RelativeLayout>

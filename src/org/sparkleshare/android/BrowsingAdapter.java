@@ -61,22 +61,21 @@ public class BrowsingAdapter extends BaseAdapter {
 		ListEntryItem item = items.get(position);
 		viewHolder.title.setText(item.getTitle());
 		viewHolder.subtitle.setText(item.getSubtitle());
-		// TODO: Need to fix this crap here
-		if (item.getType().equals("file")) {
-			String mime = URLConnection.guessContentTypeFromName(item.getTitle());
-			if (mime != null && mime.contains("image")) {
+		if (item.getMimetype() != null) {
+			String mime = item.getMimetype();
+			if (mime.contains("application")) {
+				viewHolder.icon.setImageResource(R.drawable.ic_application);
+			} else if (mime.contains("image")) {
 				viewHolder.icon.setImageResource(R.drawable.ic_image);
-			} else if (mime != null && mime.contains("text")) {
-				viewHolder.icon.setImageResource(R.drawable.ic_document);
-			} else if (mime != null && mime.contains("audio")) {
+			} else if (mime.contains("text")) {
+				viewHolder.icon.setImageResource(R.drawable.ic_text);
+			} else if (mime.contains("dir")) {
+				viewHolder.icon.setImageResource(R.drawable.ic_folder);
+			} else if (mime.contains("audio")) {
 				viewHolder.icon.setImageResource(R.drawable.ic_audio);
 			} else {
-				viewHolder.icon.setImageResource(R.drawable.ic_application);
+				viewHolder.icon.setImageResource(R.drawable.ic_package);
 			}
-		} else if (item.getType().equals("dir")) {
-			viewHolder.icon.setImageResource(R.drawable.ic_folder);
-		} else if (item.getType().equals("git")) {
-			viewHolder.icon.setImageResource(R.drawable.ic_folder);
 		}
 		return view;
 	}
