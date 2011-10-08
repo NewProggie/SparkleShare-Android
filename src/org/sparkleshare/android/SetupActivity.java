@@ -175,6 +175,9 @@ public class SetupActivity extends BaseActivity {
 			} catch (JSONException e) {
 				Log.e("Login failed", e.getLocalizedMessage());
 				return false;
+			} catch (Exception e) {
+				Log.e("Login failed", e.getLocalizedMessage());
+				return false;
 			}
     		return true;
     	}
