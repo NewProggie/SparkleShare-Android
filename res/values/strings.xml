@@ -17,6 +17,8 @@
     <string name="add_project">Add project</string>
     <string name="adding_project">Adding project...</string>
     <string name="projects">Projects</string>
+    <string name="refresh">Refresh</string>
+    <string name="upload">Upload</string>
     
     <string name="home">Home</string>
     <string name="settings">Settings</string>
