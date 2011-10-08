@@ -10,7 +10,14 @@ public class ListEntryItem {
 	private String type;
 	private String url;
 	private String mimetype;
+	private String filesize;
 	
+	public String getFilesize() {
+		return filesize;
+	}
+	public void setFilesize(String filesize) {
+		this.filesize = filesize;
+	}
 	public String getMimetype() {
 		return mimetype;
 	}
@@ -24,7 +31,12 @@ public class ListEntryItem {
 		this.title = title;
 	}
 	public String getSubtitle() {
-		return subtitle;
+		if (filesize != null) {
+			float size = Float.valueOf(filesize)/1024;
+			return String.valueOf(Math.round(size*100.0f) / 100.0f) + " KB";
+		} else {
+			return subtitle;
+		}	
 	}
 	public void setSubtitle(String subtitle) {
 		this.subtitle = subtitle;
