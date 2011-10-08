@@ -33,7 +33,7 @@
 		android:digits="true"
 		android:text="@string/link_code" android:gravity="center|left"/>
 	<EditText
-		android:inputType="number"
+		android:inputType="phone"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_link_code"
 		android:layout_width="fill_parent"
