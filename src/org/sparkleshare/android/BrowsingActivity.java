@@ -1,6 +1,5 @@
 package org.sparkleshare.android;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,9 +39,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.RemoteViews;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 /**
  * Activity for browsing content of a SparkleShare-Dashboard instance.
  * @author kai
@@ -54,6 +53,7 @@ public class BrowsingActivity extends BaseActivity {
 	private BrowsingAdapter adapter;
 	private Context context;
 	private String ident, authCode, serverUrl, folderId;
+	private String foldername = "SparkleShare";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,9 @@ public class BrowsingActivity extends BaseActivity {
 		serverUrl = prefs.getString("serverUrl", "");
 		folderId = prefs.getString("folderId", "");
 		
-		Log.d("folderId", folderId);
-		
+		if (getIntent().hasExtra("foldername")) {
+			foldername = getIntent().getStringExtra("foldername");
+		}
 		String url = getIntent().getStringExtra("url");
 		new DownloadFileList().execute(url);
 	}
@@ -93,6 +94,7 @@ public class BrowsingActivity extends BaseActivity {
 					Intent browseFolder = new Intent(context, BrowsingActivity.class);
 					String tmpUrl = serverUrl + "/api/getFolderContent/" + folderId + "?" + current.getUrl();
 					browseFolder.putExtra("url", tmpUrl);
+					browseFolder.putExtra("foldername", current.getTitle());
 					startActivity(browseFolder);
 				} else if (current.getType().equals("git")) {
 					Intent browseFolder = new Intent(context, BrowsingActivity.class);
@@ -283,7 +285,7 @@ public class BrowsingActivity extends BaseActivity {
 				addNewActionButton(R.drawable.ic_action_info, R.string.info, null);
 				addNewActionButton(R.drawable.ic_title_add, R.string.add, null);
 			} else {
-				setupActionBar("SparkleShare", Color.WHITE);
+				setupActionBar(foldername, Color.WHITE);
 			}
 		}
 	}
