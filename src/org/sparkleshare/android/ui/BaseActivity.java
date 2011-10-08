@@ -113,7 +113,7 @@ public class BaseActivity extends Activity {
 		
 		if (title != null) {
 			// adding home button
-			addActionButton(R.drawable.ic_title_home, R.string.home, homeClickListener, true);
+			addActionButton(R.drawable.ic_action_overview, R.string.home, homeClickListener, true);
 			
 			// adding title text
 			TextView titleText = new TextView(this, null, R.attr.actionbarTextStyle);
@@ -142,14 +142,6 @@ public class BaseActivity extends Activity {
 		
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.FILL_PARENT);
 		layoutParams.weight = 1;
-		
-		View.OnClickListener homeClickListener = new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				backToMain();
-			}
-		};
 		
 		if (title != null) {
 			// adding title text
