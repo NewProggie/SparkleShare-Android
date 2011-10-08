@@ -34,7 +34,7 @@
 		android:gravity="center"
 		android:text="@string/link_code" />
 	<EditText
-		android:inputType="number"
+		android:inputType="phone"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_link_code"
 		android:layout_width="fill_parent"
