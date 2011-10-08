@@ -49,6 +49,7 @@ public class SetupActivity extends BaseActivity {
 	private EditText edtServer, edtLinkcode;
 	private Context context;
 	private Button btn_add;
+	private boolean helpEditing = true;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +62,8 @@ public class SetupActivity extends BaseActivity {
         edtServer = (EditText) findViewById(R.id.edt_server);
         edtLinkcode = (EditText) findViewById(R.id.edt_link_code);
         
-        edtServer.addTextChangedListener(checkEditfields());
-        edtLinkcode.addTextChangedListener(checkEditfields());
+        edtServer.addTextChangedListener(checkServerTextView());
+        edtLinkcode.addTextChangedListener(checkLinkcodeTextView());
         
         setupActionBarWithoutHomeButton(getString(R.string.add_project), Color.BLACK);
 
@@ -96,7 +97,45 @@ public class SetupActivity extends BaseActivity {
      * Checks both mandatory edit fields and enables the add button inside this Activity.
      * @return
      */
-    private TextWatcher checkEditfields() {
+    private TextWatcher checkServerTextView() {
+    	TextWatcher watcher = new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) { }
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				/* assist user writing http://www.example.com */
+				if (edtServer.getEditableText().length() == 1 && edtServer.getEditableText().toString().endsWith("h")) {
+					String protocol = "http://";
+					edtServer.setText(protocol);
+					edtServer.setSelection(protocol.length());
+				}
+				/* assist user writing port number */
+				if (edtServer.getEditableText().toString().endsWith(":") && helpEditing) {
+					helpEditing = false;
+					String portnumber = "3000";
+					edtServer.append(portnumber);
+				}
+				
+				if (edtServer.getEditableText().length() > 0 && edtLinkcode.getEditableText().length() > 0) {
+					btn_add.setEnabled(true);
+				} else {
+					btn_add.setEnabled(false);
+				}
+			}
+		};
+		return watcher;
+    }
+    
+    /**
+     * Checks both mandatory edit fields and enables the add button inside this Activity.
+     * @return
+     */
+    private TextWatcher checkLinkcodeTextView() {
     	TextWatcher watcher = new TextWatcher() {
 			
 			@Override
