@@ -30,9 +30,11 @@
 		android:layout_alignLeft="@+id/edt_server"
 		android:layout_width="fill_parent"
 		android:id="@+id/tv_link_code"
+		android:digits="true"
+		android:gravity="center"
 		android:text="@string/link_code" />
 	<EditText
-		android:inputType="textPassword"
+		android:inputType="number"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_link_code"
 		android:layout_width="fill_parent"
