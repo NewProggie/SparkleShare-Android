@@ -94,7 +94,7 @@ public class SetupActivity extends BaseActivity {
     }
     
     private String formatServerUrl(String url) {
-    	// TODO: Should use regular expression here
+    	// TODO: Should use regular expression here.
     	if (!url.contains(":")) {
     		url = url.concat(":3000");
     	}
