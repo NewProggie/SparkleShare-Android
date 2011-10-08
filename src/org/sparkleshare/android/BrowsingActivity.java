@@ -281,7 +281,7 @@ public class BrowsingActivity extends BaseActivity {
 		protected void onPostExecute(Boolean result) {
 			loadingDialog.dismiss();
 			if (isProjectsDirectory) {
-				setupActionBar(getString(R.string.projects), Color.WHITE);
+				setupActionBarWithoutHomeButton(getString(R.string.projects), Color.WHITE);
 				addNewActionButton(R.drawable.ic_action_info, R.string.info, null);
 				addNewActionButton(R.drawable.ic_title_add, R.string.add, null);
 			} else {
