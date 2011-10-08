@@ -4,7 +4,7 @@
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:padding="10dip">
+	android:padding="10dip" android:gravity="left">
 	<TextView
 		style="@style/TextLabelSetupStyle"
 		android:layout_height="wrap_content"
@@ -31,15 +31,14 @@
 		android:layout_width="fill_parent"
 		android:id="@+id/tv_link_code"
 		android:digits="true"
-		android:gravity="center"
-		android:text="@string/link_code" />
+		android:text="@string/link_code" android:gravity="center|left"/>
 	<EditText
 		android:inputType="number"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/tv_link_code"
 		android:layout_width="fill_parent"
 		android:id="@+id/edt_link_code"
-		android:singleLine="true"></EditText>
+		android:singleLine="true" />
 	<LinearLayout
 		android:id="@+id/button_container"
 		android:layout_height="wrap_content"

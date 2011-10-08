@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URLConnection;
@@ -23,6 +24,9 @@ import org.sparkleshare.android.ui.BaseActivity;
 import org.sparkleshare.android.ui.ListEntryItem;
 import org.sparkleshare.android.utils.ExternalDirectory;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -36,6 +40,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.RemoteViews;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 /**
@@ -111,7 +116,7 @@ public class BrowsingActivity extends BaseActivity {
 						StringBuilder sb = new StringBuilder();
 						sb.append(serverUrl);
 						sb.append("/api/getFile/");
-						sb.append(current.getId() + "?");
+						sb.append(folderId + "?");
 						sb.append(current.getUrl());
 						current.setUrl(sb.toString());
 						new DownloadFile().execute(current);
@@ -125,10 +130,19 @@ public class BrowsingActivity extends BaseActivity {
 	
 	private class DownloadFile extends AsyncTask<ListEntryItem, Integer, Boolean> {
 		
+		Notification notification;
+		NotificationManager notificationManager;
+		private int maxProgress;
+		
 		@Override
 		protected void onPreExecute() {
-			// TODO: Progressdialog in action bar
-			super.onPreExecute();
+			notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			Intent notificationIntent = new Intent(context, BrowsingActivity.class);
+			PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+			notification = new Notification(R.drawable.ic_stat_download, "", System.currentTimeMillis());
+			notification.flags = notification.flags | Notification.FLAG_ONGOING_EVENT;
+			notification.contentView = new RemoteViews(getApplicationContext().getPackageName(), R.layout.download_progress);
+			notification.contentIntent = intent;
 		}
 		
 		@Override
@@ -141,14 +155,31 @@ public class BrowsingActivity extends BaseActivity {
 				Log.d("url", current.getUrl());
 				get.setHeader("X-SPARKLE-IDENT", ident);
 				get.setHeader("X-SPARKLE-AUTH", authCode);
-				HttpEntity entity = client.execute(get).getEntity();
-				if (entity != null) {
-					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
-					OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-					entity.writeTo(out);
-					entity.consumeContent();
-					out.close();
-				}
+				HttpResponse response = client.execute(get);
+				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+					HttpEntity entity = response.getEntity();
+					if (entity != null) {
+						notification.contentView.setTextViewText(R.id.tv_download_title, current.getTitle());
+						notificationManager.notify(17, notification);
+						File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+						InputStream input = entity.getContent();
+						OutputStream output = new FileOutputStream(file);
+						byte buffer[] = new byte[1024];
+						int count = 0, total = 0;
+						long nextUpdate = System.currentTimeMillis() + 2000;
+						while ((count = input.read(buffer)) > 0) {
+							output.write(buffer, 0, count);
+							total += count;
+							if (System.currentTimeMillis() > nextUpdate) {
+								publishProgress(total);
+								nextUpdate = System.currentTimeMillis() + 3000;
+							}
+						}
+						output.flush();
+						output.close();
+						input.close();
+					}
+				} 
 			} catch (ClientProtocolException e) {
 				Log.e("DownloadFile", e.getLocalizedMessage());
 				return false;
@@ -161,14 +192,14 @@ public class BrowsingActivity extends BaseActivity {
 		
 		@Override
 		protected void onProgressUpdate(Integer... values) {
-			// TODO: Implement Notification showing download progress
-			super.onProgressUpdate(values);
+			int progress = values[0];
+			notification.contentView.setProgressBar(R.id.pb_download_progressbar, maxProgress, progress, false);
+			notificationManager.notify(17, notification);
 		}
 		
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
+			notificationManager.cancel(17);
 		}
 	}
 	
