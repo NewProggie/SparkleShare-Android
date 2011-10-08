@@ -16,6 +16,7 @@
 		<item name="android:layout_width">@dimen/actionbar_height</item>
 		<item name="android:layout_height">fill_parent</item>
 		<item name="android:scaleType">center</item>
+		<item name="android:background">@drawable/actionbar_button_selector</item>
 	</style>
 	<style name="ActionBarSeparator">
 		<item name="android:layout_width">2px</item>
