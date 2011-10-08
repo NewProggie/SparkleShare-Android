@@ -33,7 +33,7 @@ public class ListEntryItem {
 	public String getSubtitle() {
 		if (filesize != null) {
 			float size = Float.valueOf(filesize)/1024;
-			return String.valueOf(Math.round(size*100.0f) / 100.0f) + " KB";
+			return String.valueOf(Math.round(size)) + " KB";
 		} else {
 			return subtitle;
 		}	
