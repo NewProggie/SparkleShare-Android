@@ -139,7 +139,6 @@ public class SetupActivity extends BaseActivity {
     	private ProgressDialog loadingDialog;
     	private final String AUTH_SUFFIX = "/api/getAuthCode";
     	private String serverUrl;
-    	private String foldername;
     	
     	@Override
     	protected void onPreExecute() {
@@ -169,7 +168,6 @@ public class SetupActivity extends BaseActivity {
 					// TODO: encrypt credentials 
 					String ident = credentials.getString("ident");
 					String authCode = credentials.getString("authCode");
-					foldername = credentials.getString("name");
 					SharedPreferences prefs = SettingsActivity.getSettings((ContextWrapper) context);
 					Editor editor  = prefs.edit();
 					editor.putString("ident", ident);
@@ -203,7 +201,6 @@ public class SetupActivity extends BaseActivity {
     			Intent browseData = new Intent(context, BrowsingActivity.class);
     			// TODO: outsource API constants
     			browseData.putExtra("url", serverUrl + "/api/getFolderList");
-    			browseData.putExtra("foldername", foldername);
     			startActivity(browseData);
     		} else {
     			AlertDialog.Builder builder = new AlertDialog.Builder(context);
