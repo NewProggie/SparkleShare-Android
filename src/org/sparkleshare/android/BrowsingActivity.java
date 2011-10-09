@@ -290,7 +290,7 @@ public class BrowsingActivity extends BaseActivity {
 					}
 					
 				});
-				addNewActionButton(R.drawable.ic_title_add, R.string.add, null);
+				addNewActionButton(R.drawable.ic_action_add, R.string.add, null);
 			} else {
 				setupActionBar(foldername, Color.WHITE);
 				addNewActionButton(R.drawable.ic_action_refresh, R.string.refresh, null);
