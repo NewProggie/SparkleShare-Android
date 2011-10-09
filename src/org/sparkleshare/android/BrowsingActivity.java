@@ -39,6 +39,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -111,10 +112,11 @@ public class BrowsingActivity extends BaseActivity {
 					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
 					if (file.exists()) {
 						Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getAbsolutePath()));
-						String mime = URLConnection.guessContentTypeFromName(file.getAbsolutePath());
+						String extension = MimeTypeMap.getFileExtensionFromUrl(file.getAbsolutePath());
+						String mimetype = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
 						open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						open.setAction(android.content.Intent.ACTION_VIEW);
-						open.setDataAndType((Uri.fromFile(file)), mime);
+						open.setDataAndType((Uri.fromFile(file)), mimetype);
 						startActivity(open);
 					} else {
 						StringBuilder sb = new StringBuilder();
