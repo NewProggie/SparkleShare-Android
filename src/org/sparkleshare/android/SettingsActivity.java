@@ -6,15 +6,17 @@ import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 
-public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class SettingsActivity extends PreferenceActivity {
 
 	private Preference releaseAccount;
+	private CheckBoxPreference hideFilesFolders;
 	private Context context;
 	
 	@Override
@@ -23,6 +25,21 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		context = this;
 		addPreferencesFromResource(R.xml.settings);
 		
+		hideFilesFolders = (CheckBoxPreference) findPreference(getString(R.string.settings_hide_files_folders));
+		hideFilesFolders.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				SharedPreferences prefs = getSettings((ContextWrapper) context);
+				Editor editor = prefs.edit();
+				if (hideFilesFolders.isChecked()) {
+					editor.putBoolean("hideFilesFolders", false);
+				} else {
+					editor.putBoolean("hideFilesFolders", true);
+				}
+				return editor.commit();
+			}
+		});
 		releaseAccount = (Preference) findPreference(getString(R.string.settings_release_account));
 		releaseAccount.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			
@@ -54,16 +71,12 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 				return true;
 			}
 		});
+		
 	}
 	
 	public static final SharedPreferences getSettings(final ContextWrapper context) {
 		String name = context.getPackageName() + "_preferences";
 		return context.getSharedPreferences(name, MODE_PRIVATE);
 	}
-	
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

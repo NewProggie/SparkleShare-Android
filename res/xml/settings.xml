@@ -4,6 +4,9 @@
 		<Preference
 			android:key="@string/settings_release_account"
 			android:title="@string/settings_release_account" />
+		<CheckBoxPreference
+			android:key="@string/settings_hide_files_folders"
+			android:title="@string/settings_hide_files_folders" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/info">
 		<Preference 

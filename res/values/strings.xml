@@ -25,6 +25,7 @@
     <string name="info">Info</string>
     <string name="sparkleshare_account">SparkleShare-Account</string>
     <string name="settings_release_account">Release account</string>
+    <string name="settings_hide_files_folders">Hide .* files and folders</string>
     <string name="app_version">App-Version</string>
     <string name="setup_account">Enter link code</string>
     <string name="scan_qrcode">Scan QR code</string>

@@ -6,6 +6,8 @@ import java.util.Collections;
 import org.sparkleshare.android.ui.ListEntryItem;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +19,13 @@ public class BrowsingAdapter extends BaseAdapter {
 
 	private ArrayList<ListEntryItem> items;
 	private Context context;
+	private Boolean hideFilesFolders;
 	
 	public BrowsingAdapter(Context context) {
 		this.context = context;
 		items = new ArrayList<ListEntryItem>();
+		SharedPreferences prefs = SettingsActivity.getSettings((ContextWrapper) context);
+		hideFilesFolders = prefs.getBoolean("hideFilesFolders", false);
 	}
 	
 	@Override
@@ -29,9 +34,13 @@ public class BrowsingAdapter extends BaseAdapter {
 	}
 
 	public void addEntry(ListEntryItem entry) {
-		items.add(entry);
-		Collections.sort(items);
-		notifyDataSetChanged();
+		if (hideFilesFolders && entry.getTitle().startsWith(".")) {
+			return;
+		} else {
+			items.add(entry);
+			Collections.sort(items);
+			notifyDataSetChanged();
+		}
 	}
 	
 	@Override
