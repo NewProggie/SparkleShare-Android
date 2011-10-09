@@ -105,6 +105,7 @@ public class BrowsingActivity extends BaseActivity {
 					editor.putString("folderId", folderId);
 					editor.commit();
 					browseFolder.putExtra("url", serverUrl + "/api/getFolderContent/" + folderId);
+					browseFolder.putExtra("foldername", current.getTitle());
 					startActivity(browseFolder);
 				} else if (current.getType().equals("file")) {
 					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
