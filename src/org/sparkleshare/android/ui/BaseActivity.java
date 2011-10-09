@@ -3,7 +3,6 @@ package org.sparkleshare.android.ui;
 import org.sparkleshare.android.BrowsingActivity;
 import org.sparkleshare.android.R;
 import org.sparkleshare.android.SettingsActivity;
-import org.sparkleshare.android.SetupActivity;
 
 import android.app.Activity;
 import android.content.Intent;

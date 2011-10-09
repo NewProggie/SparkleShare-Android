@@ -10,5 +10,11 @@
 		android:id="@+id/layout_container"
 		android:layout_weight="1"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent" />
+		android:layout_height="fill_parent">
+		<ProgressBar 
+			android:id="@+id/loading_spinner"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_gravity="center"/>
+	</FrameLayout>
 </LinearLayout>

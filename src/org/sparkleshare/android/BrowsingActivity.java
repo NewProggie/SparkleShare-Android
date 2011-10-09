@@ -65,7 +65,7 @@ public class BrowsingActivity extends BaseActivity {
 		adapter = new BrowsingAdapter(context);
 		lvBrowsing.setAdapter(adapter);
 		lvBrowsing.setOnItemClickListener(onListItemClick());
-		setContentView(lvBrowsing);
+		
 		
 		SharedPreferences prefs = SettingsActivity.getSettings((ContextWrapper) context);
 		ident = prefs.getString("ident", "");
@@ -210,11 +210,9 @@ public class BrowsingActivity extends BaseActivity {
 	private class DownloadFileList extends AsyncTask<String, ListEntryItem, Boolean> {
 		
 		private boolean isProjectsDirectory = false;
-		private ProgressDialog loadingDialog;
 		
 		@Override
 		protected void onPreExecute() {
-			loadingDialog = ProgressDialog.show(context, "", getString(R.string.please_wait));
 		}
 		
 		@Override
@@ -280,7 +278,7 @@ public class BrowsingActivity extends BaseActivity {
 		
 		@Override
 		protected void onPostExecute(Boolean result) {
-			loadingDialog.dismiss();
+			setContentView(lvBrowsing);
 			if (isProjectsDirectory) {
 				setupActionBarWithoutHomeButton(getString(R.string.projects), Color.WHITE);
 				addNewActionButton(R.drawable.ic_action_info, R.string.info, new OnClickListener() {
