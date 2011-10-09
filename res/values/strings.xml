@@ -22,7 +22,7 @@
     
     <string name="home">Home</string>
     <string name="settings">Settings</string>
-    <string name="info">Info</string>
+    <string name="info">About SparkleShare</string>
     <string name="sparkleshare_account">Account</string>
     <string name="settings_release_account">Forget account</string>
     <string name="settings_hide_files_folders">Show hidden files</string>
