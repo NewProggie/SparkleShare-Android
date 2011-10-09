@@ -71,37 +71,26 @@ public class BrowsingAdapter extends BaseAdapter {
 		}
 		ListEntryItem item = items.get(position);
 		viewHolder.title.setText(item.getTitle());
-		viewHolder.subtitle.setText(item.getSubtitle());
+		File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + item.getTitle());
+		if (file.exists()) {
+			viewHolder.subtitle.setText("✔ " + item.getSubtitle());
+		} else {
+			viewHolder.subtitle.setText(item.getSubtitle());
+		}
+		
 		// TODO: Need to fix this. Refactor in to seperate class
 		if (item.getMimetype() != null) {
 			String mime = item.getMimetype();
-			File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + item.getTitle());
 			if (mime.contains("application")) {
-				if (file.exists()) {
-					viewHolder.icon.setImageResource(R.drawable.ic_application_downloaded);
-				} else {
-					viewHolder.icon.setImageResource(R.drawable.ic_application);
-				}
+				viewHolder.icon.setImageResource(R.drawable.ic_application);
 			} else if (mime.contains("image")) {
-				if (file.exists()) {
-					viewHolder.icon.setImageResource(R.drawable.ic_image_downloaded);
-				} else {
-					viewHolder.icon.setImageResource(R.drawable.ic_image);
-				}
+				viewHolder.icon.setImageResource(R.drawable.ic_image);
 			} else if (mime.contains("text")) {
-				if (file.exists()) {
-					viewHolder.icon.setImageResource(R.drawable.ic_text_downloaded);
-				} else {
-					viewHolder.icon.setImageResource(R.drawable.ic_text);
-				}
+				viewHolder.icon.setImageResource(R.drawable.ic_text);
 			} else if (mime.contains("dir")) {
 				viewHolder.icon.setImageResource(R.drawable.ic_folder);
 			} else if (mime.contains("audio")) {
-				if (file.exists()) {
-					viewHolder.icon.setImageResource(R.drawable.ic_audio_downloaded);
-				} else {
-					viewHolder.icon.setImageResource(R.drawable.ic_audio);
-				}
+				viewHolder.icon.setImageResource(R.drawable.ic_audio);
 			} else {
 				viewHolder.icon.setImageResource(R.drawable.ic_text);
 			}
