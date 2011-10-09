@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:padding="16dp">
+	<TextView
+		android:layout_height="wrap_content"
+		android:id="@+id/textView1"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:text="@string/app_name"
+		android:layout_width="fill_parent"></TextView>
+	<TextView
+		android:layout_height="wrap_content"
+		android:text="Version 0.1"
+		android:layout_below="@+id/textView1"
+		android:layout_alignParentLeft="true"
+		android:id="@+id/tv_version_number"
+		android:layout_width="fill_parent" />
+	<TextView
+		android:layout_height="wrap_content"
+		android:id="@+id/textView2"
+		android:layout_alignTop="@+id/tv_version_number"
+		android:layout_alignParentLeft="true"
+		android:layout_marginTop="36dp"
+		android:text="@string/copyright"
+		android:layout_width="fill_parent"></TextView>
+	<TextView
+		android:layout_height="wrap_content"
+		android:id="@+id/textView3"
+		android:layout_below="@+id/textView2"
+		android:layout_alignLeft="@+id/textView2"
+		android:text="@string/authors"
+		android:layout_width="fill_parent"></TextView>
+	<TextView
+		android:layout_height="wrap_content"
+		android:id="@+id/textView4"
+		android:layout_below="@+id/textView3"
+		android:layout_alignLeft="@+id/textView3"
+		android:layout_marginTop="16dp"
+		android:layout_width="fill_parent"
+		android:text="@string/disclaimer"></TextView>
+	<Button
+		android:layout_height="wrap_content"
+		android:text="Spend 0,99 €"
+		android:layout_below="@+id/textView4"
+		android:layout_alignLeft="@+id/textView4"
+		android:layout_width="fill_parent"
+		android:layout_marginTop="16dp"
+		android:id="@+id/btn_spending" />
+	<ImageView 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/btn_spending"
+		android:src="@drawable/sparkleshare_logo"/>
+</RelativeLayout>

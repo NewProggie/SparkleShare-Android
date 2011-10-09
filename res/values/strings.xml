@@ -35,4 +35,7 @@
     <string name="get_started">Get started by adding a project:</string>
     <string name="never_mind">Never mind</string>
     <string name="add">Add</string>
+    <string name="copyright">Copyright © 2011</string>
+    <string name="authors">Kai Wolf, Hylke Bons and others.</string>
+    <string name="disclaimer">SparkleShare is Free and Open Source Software. You are free to use, modify, and redistribute it under the GNU General Public License version 2 or later.</string>
 </resources>

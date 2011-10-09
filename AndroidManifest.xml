@@ -23,6 +23,6 @@
 		<activity android:name=".SetupActivity" android:screenOrientation="portrait" />
 		<activity android:name=".SettingsActivity" />
 		<activity android:name=".BrowsingActivity" />
-		<activity android:name=".InfoActivity" />
+		<activity android:name=".AboutActivity" />
 	</application>
 </manifest>

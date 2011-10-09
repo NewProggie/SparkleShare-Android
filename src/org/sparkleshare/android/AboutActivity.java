@@ -10,11 +10,12 @@ import android.os.Bundle;
  * @author kai
  *
  */
-public class InfoActivity extends BaseActivity {
+public class AboutActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.about);
 		setupActionBar(getString(R.string.info), Color.WHITE);
 	}
 }

@@ -38,6 +38,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -282,7 +283,15 @@ public class BrowsingActivity extends BaseActivity {
 			loadingDialog.dismiss();
 			if (isProjectsDirectory) {
 				setupActionBarWithoutHomeButton(getString(R.string.projects), Color.WHITE);
-				addNewActionButton(R.drawable.ic_action_info, R.string.info, null);
+				addNewActionButton(R.drawable.ic_action_info, R.string.info, new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent showAboutScreen = new Intent(context, AboutActivity.class);
+						startActivity(showAboutScreen);
+					}
+					
+				});
 				addNewActionButton(R.drawable.ic_title_add, R.string.add, null);
 			} else {
 				setupActionBar(foldername, Color.WHITE);
