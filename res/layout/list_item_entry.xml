@@ -2,28 +2,32 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="?android:attr/listPreferredItemHeight" android:padding="10dp">
+	android:layout_height="?android:attr/listPreferredItemHeight"
+	android:padding="10dp">
 	<ImageView
 		android:id="@+id/list_item_icon"
 		android:layout_width="wrap_content"
 		android:layout_height="fill_parent"
 		android:layout_alignParentTop="true"
 		android:layout_alignParentBottom="true"
-		android:src="@drawable/icon" android:layout_marginRight="8dp"/>
+		android:src="@drawable/icon"
+		android:layout_marginRight="8dp" android:paddingBottom="4dp"/>
 	<TextView
 		android:id="@+id/list_item_title"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="Titel" 
+		android:text="Titel"
 		android:singleLine="true"
 		android:lines="1"
-		android:layout_toRightOf="@id/list_item_icon" android:textColor="@color/white" android:textSize="18dp"/>
-	<TextView 
+		android:layout_toRightOf="@id/list_item_icon"
+		android:textColor="@color/white"
+		android:textSize="18dp" />
+	<TextView
 		android:id="@+id/list_item_subtitle"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="Subtitle" 
+		android:text="Subtitle"
 		android:layout_below="@id/list_item_title"
 		android:layout_toRightOf="@id/list_item_icon"
-		 android:textSize="12dp"/>
+		android:textSize="12dp" />
 </RelativeLayout>
