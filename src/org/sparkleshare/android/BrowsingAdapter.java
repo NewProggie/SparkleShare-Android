@@ -74,7 +74,7 @@ public class BrowsingAdapter extends BaseAdapter {
 			} else if (mime.contains("audio")) {
 				viewHolder.icon.setImageResource(R.drawable.ic_audio);
 			} else {
-				viewHolder.icon.setImageResource(R.drawable.ic_package);
+				viewHolder.icon.setImageResource(R.drawable.ic_text);
 			}
 		}
 		return view;
