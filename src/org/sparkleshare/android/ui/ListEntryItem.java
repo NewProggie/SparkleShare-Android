@@ -32,8 +32,7 @@ public class ListEntryItem implements Comparable<ListEntryItem> {
 	}
 	public String getSubtitle() {
 		if (filesize != null) {
-			float size = Float.valueOf(filesize)/1024;
-			return String.valueOf(Math.round(size)) + " KB";
+			return FormatHelper.formatFilesize(filesize);
 		} else {
 			return subtitle;
 		}	
