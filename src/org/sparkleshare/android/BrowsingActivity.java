@@ -53,7 +53,7 @@ public class BrowsingActivity extends BaseActivity {
 	private ListView lvBrowsing;
 	private BrowsingAdapter adapter;
 	private Context context;
-	private String ident, authCode, serverUrl, folderId;
+	private String ident, authCode, serverUrl, folderId, currentUrl;
 	private String foldername = "SparkleShare";
 
 	@Override
@@ -76,8 +76,8 @@ public class BrowsingActivity extends BaseActivity {
 		if (getIntent().hasExtra("foldername")) {
 			foldername = getIntent().getStringExtra("foldername");
 		}
-		String url = getIntent().getStringExtra("url");
-		new DownloadFileList().execute(url);
+		currentUrl = getIntent().getStringExtra("url");
+		new DownloadFileList().execute(currentUrl);
 	}
 	
 	/**
@@ -293,7 +293,16 @@ public class BrowsingActivity extends BaseActivity {
 				addNewActionButton(R.drawable.ic_action_add, R.string.add, null);
 			} else {
 				setupActionBar(foldername, Color.WHITE);
-				addNewActionButton(R.drawable.ic_action_refresh, R.string.refresh, null);
+				addNewActionButton(R.drawable.ic_action_refresh, R.string.refresh, new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent refreshList = new Intent(context, BrowsingActivity.class);
+						refreshList.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+						refreshList.putExtra("url", currentUrl);
+						startActivity(refreshList);
+					}
+				});
 			}
 		}
 	}
