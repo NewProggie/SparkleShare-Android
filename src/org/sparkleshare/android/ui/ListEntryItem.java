@@ -2,7 +2,7 @@ package org.sparkleshare.android.ui;
 
 import android.graphics.Bitmap;
 
-public class ListEntryItem {
+public class ListEntryItem implements Comparable<ListEntryItem> {
 
 	private String title, subtitle;
 	private Bitmap icon;
@@ -64,6 +64,23 @@ public class ListEntryItem {
 	}
 	public void setIcon(Bitmap icon) {
 		this.icon = icon;
+	}
+	@Override
+	public int compareTo(ListEntryItem another) {
+		if (type.equals("file")) {
+			if (another.type.equals("dir")) {
+				return 1;
+			} else {
+				return title.compareToIgnoreCase(another.title);
+			}
+		} else {
+			/* type.equals("dir) */
+			if (another.type.equals("file")) {
+				return -1;
+			} else {
+				return title.compareToIgnoreCase(another.title);
+			}
+		}
 	}
 	
 }

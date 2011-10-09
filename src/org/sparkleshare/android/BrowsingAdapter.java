@@ -1,12 +1,11 @@
 package org.sparkleshare.android;
 
-import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.sparkleshare.android.ui.ListEntryItem;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,7 @@ public class BrowsingAdapter extends BaseAdapter {
 
 	public void addEntry(ListEntryItem entry) {
 		items.add(entry);
+		Collections.sort(items);
 		notifyDataSetChanged();
 	}
 	
