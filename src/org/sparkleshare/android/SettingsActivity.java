@@ -33,9 +33,9 @@ public class SettingsActivity extends PreferenceActivity {
 				SharedPreferences prefs = getSettings((ContextWrapper) context);
 				Editor editor = prefs.edit();
 				if (hideFilesFolders.isChecked()) {
-					editor.putBoolean("hideFilesFolders", false);
-				} else {
 					editor.putBoolean("hideFilesFolders", true);
+				} else {
+					editor.putBoolean("hideFilesFolders", false);
 				}
 				return editor.commit();
 			}
