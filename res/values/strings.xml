@@ -21,6 +21,8 @@
     <string name="upload">Upload</string>
     <string name="activity_not_found">Sorry. It seems no installed App can handle this type of file</string>
     <string name="not_implemented_yet">Not implemented yet</string>
+    <string name="downloading">downloading...</string>
+    <string name="downloading_failed">Sorry, an error occurred while downloading this file</string>
     
     <string name="home">Home</string>
     <string name="settings">Settings</string>

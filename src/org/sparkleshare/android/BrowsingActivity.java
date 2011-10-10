@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,6 +31,8 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -116,6 +119,13 @@ public class BrowsingActivity extends BaseActivity {
 						open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						open.setAction(android.content.Intent.ACTION_VIEW);
 						open.setDataAndType((Uri.fromFile(file)), mimetype);
+						PackageManager packageManager = getPackageManager();
+						List<ResolveInfo> list = packageManager.queryIntentActivities(open, PackageManager.MATCH_DEFAULT_ONLY);
+						if (list.size() > 0) {
+							startActivity(open);
+						} else {
+							Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_SHORT).show();
+						}
 						startActivity(open);
 					} else {
 						StringBuilder sb = new StringBuilder();
