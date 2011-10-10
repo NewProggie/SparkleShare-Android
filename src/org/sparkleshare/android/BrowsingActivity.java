@@ -42,6 +42,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 /**
  * Activity for browsing content of a SparkleShare-Dashboard instance.
  * @author kai
@@ -292,7 +293,14 @@ public class BrowsingActivity extends BaseActivity {
 					}
 					
 				});
-				addNewActionButton(R.drawable.ic_action_add, R.string.add, null);
+				addNewActionButton(R.drawable.ic_action_add, R.string.add, new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Toast.makeText(context, getString(R.string.not_implemented_yet), Toast.LENGTH_SHORT).show();
+					}
+					
+				});
 			} else {
 				setupActionBar(foldername, Color.WHITE);
 				addNewActionButton(R.drawable.ic_action_refresh, R.string.refresh, new OnClickListener() {
