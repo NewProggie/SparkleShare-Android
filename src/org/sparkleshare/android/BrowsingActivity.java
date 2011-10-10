@@ -133,6 +133,7 @@ public class BrowsingActivity extends BaseActivity {
 						sb.append("/api/getFile/");
 						sb.append(folderId + "?");
 						sb.append(current.getUrl());
+						current.setListviewPosition(position);
 						current.setUrl(sb.toString());
 						new DownloadFile().execute(current);
 					}
@@ -148,6 +149,7 @@ public class BrowsingActivity extends BaseActivity {
 		Notification notification;
 		NotificationManager notificationManager;
 		private int maxProgress;
+		ListEntryItem current;
 		
 		@Override
 		protected void onPreExecute() {
@@ -163,7 +165,7 @@ public class BrowsingActivity extends BaseActivity {
 		@Override
 		protected Boolean doInBackground(ListEntryItem... params) {
 			// TODO: Check for connectivity
-			ListEntryItem current = params[0];
+			current = params[0];
 			try {
 				HttpClient client = new DefaultHttpClient();
 				HttpGet get = new HttpGet(current.getUrl());
@@ -172,6 +174,7 @@ public class BrowsingActivity extends BaseActivity {
 				get.setHeader("X-SPARKLE-AUTH", authCode);
 				HttpResponse response = client.execute(get);
 				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+					publishProgress(0);
 					HttpEntity entity = response.getEntity();
 					if (entity != null) {
 						notification.contentView.setTextViewText(R.id.tv_download_title, current.getTitle());
@@ -216,6 +219,16 @@ public class BrowsingActivity extends BaseActivity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			notificationManager.cancel(17);
+			if (result) {
+				((ListEntryItem) adapter.getItem(current.getListviewPosition())).setSubtitle("✔ " + current.getSubtitle());
+				adapter.notifyDataSetChanged();
+				lvBrowsing.invalidateViews();
+			} else {
+				((ListEntryItem) adapter.getItem(current.getListviewPosition())).setSubtitle(current.getSubtitle());
+				adapter.notifyDataSetChanged();
+				lvBrowsing.invalidateViews();
+				Toast.makeText(context, getString(R.string.downloading_failed), Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 	

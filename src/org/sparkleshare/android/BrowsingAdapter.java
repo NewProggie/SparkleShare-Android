@@ -49,6 +49,11 @@ public class BrowsingAdapter extends BaseAdapter {
 	public Object getItem(int position) {
 		return items.get(position);
 	}
+	
+	public void setItem(ListEntryItem item, int listviewPosition) {
+		items.set(listviewPosition, item);
+		notifyDataSetChanged();
+	}
 
 	@Override
 	public long getItemId(int position) {
@@ -110,4 +115,5 @@ public class BrowsingAdapter extends BaseAdapter {
 			this.subtitle = subtitle;
 		}
 	}
+
 }

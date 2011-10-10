@@ -11,7 +11,14 @@ public class ListEntryItem implements Comparable<ListEntryItem> {
 	private String url;
 	private String mimetype;
 	private String filesize;
+	private int listviewPosition;
 	
+	public int getListviewPosition() {
+		return listviewPosition;
+	}
+	public void setListviewPosition(int listviewPosition) {
+		this.listviewPosition = listviewPosition;
+	}
 	public String getFilesize() {
 		return filesize;
 	}
