@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.URLConnection;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,7 +25,6 @@ import org.sparkleshare.android.utils.ExternalDirectory;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -168,17 +166,18 @@ public class BrowsingActivity extends BaseActivity {
 						notification.contentView.setTextViewText(R.id.tv_download_title, current.getTitle());
 						notificationManager.notify(17, notification);
 						File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+						maxProgress = Integer.valueOf(current.getFilesize());
 						InputStream input = entity.getContent();
 						OutputStream output = new FileOutputStream(file);
 						byte buffer[] = new byte[1024];
 						int count = 0, total = 0;
-						long nextUpdate = System.currentTimeMillis() + 2000;
+						long nextUpdate = System.currentTimeMillis() + 1000;
 						while ((count = input.read(buffer)) > 0) {
 							output.write(buffer, 0, count);
 							total += count;
 							if (System.currentTimeMillis() > nextUpdate) {
 								publishProgress(total);
-								nextUpdate = System.currentTimeMillis() + 3000;
+								nextUpdate = System.currentTimeMillis() + 1000;
 							}
 						}
 						output.flush();

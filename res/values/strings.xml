@@ -19,6 +19,7 @@
     <string name="projects">SparkleShare</string>
     <string name="refresh">Refresh</string>
     <string name="upload">Upload</string>
+    <string name="activity_not_found">Sorry. It seems no installed App can handle this type of file</string>
     
     <string name="home">Home</string>
     <string name="settings">Settings</string>
