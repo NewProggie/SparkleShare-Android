@@ -11,6 +11,7 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * Splash {@link Activity} which will be shown to user when no previously saved credentials could be found.
@@ -57,7 +58,14 @@ public class SplashActivity extends Activity {
 			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
 			intent.setPackage("com.google.zxing.client.android");
 			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-			startActivityForResult(intent, 0);
+			PackageManager packageManager = getPackageManager();
+			List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+			if (list.size() > 0) {
+				startActivityForResult(intent, 0);	
+			} else {
+				Toast.makeText(context, getString(R.string.scanner_app_not_found), Toast.LENGTH_SHORT).show();
+			}
+			
 			break;
 		}
 	}
