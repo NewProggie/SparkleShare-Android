@@ -1,9 +1,11 @@
 package org.sparkleshare.android;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -58,6 +60,9 @@ public class SettingsActivity extends PreferenceActivity {
 							editor.remove("ident");
 							editor.remove("authCode");
 							editor.commit();
+							Intent backToSetup = new Intent(context, SetupActivity.class);
+							startActivity(backToSetup);
+							((Activity) context).finish();
 						}
 					}).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
 						
