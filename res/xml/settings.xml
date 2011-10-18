@@ -13,6 +13,6 @@
 			android:key="@string/app_version"
 			android:title="@string/app_version"
 			android:enabled="false"
-			android:summary="0.1"/>
+			android:summary="@string/version"/>
 	</PreferenceCategory>
 </PreferenceScreen>

@@ -23,9 +23,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -71,7 +69,7 @@ public class FileDetailsActivity extends BaseActivity {
 		file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
 		btnOpenFile.setEnabled(file.exists());
 
-		setupActionBarWithoutHomeButton(current.getTitle(), Color.WHITE);
+		setupActionBar(current.getTitle(), Color.WHITE);
 		tvFilename.setText(current.getTitle());
 		tvFileSize.setText(FormatHelper.formatFilesize(current.getFilesize()));
 	}
@@ -124,6 +122,7 @@ public class FileDetailsActivity extends BaseActivity {
 			notification.contentView = new RemoteViews(getApplicationContext().getPackageName(),
 					R.layout.download_progress);
 			notification.contentIntent = intent;
+			
 		}
 
 		@Override
@@ -133,7 +132,6 @@ public class FileDetailsActivity extends BaseActivity {
 			try {
 				HttpClient client = new DefaultHttpClient();
 				HttpGet get = new HttpGet(current.getUrl());
-				Log.d("url", current.getUrl());
 				get.setHeader("X-SPARKLE-IDENT", ident);
 				get.setHeader("X-SPARKLE-AUTH", authCode);
 				HttpResponse response = client.execute(get);
