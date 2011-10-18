@@ -31,7 +31,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 /**
  * Activity for browsing content of a SparkleShare-Dashboard instance.
  * @author kai
