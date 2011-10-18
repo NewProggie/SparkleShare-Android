@@ -17,16 +17,18 @@
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
 		android:layout_below="@+id/textView1"
-		android:layout_alignParentLeft="true" android:layout_width="fill_parent">
+		android:layout_alignParentLeft="true"
+		android:layout_width="fill_parent">
 		<TextView
 			android:layout_height="wrap_content"
 			android:text="Version"
 			android:id="@+id/tv_version_number"
 			android:layout_width="wrap_content" />
-		<TextView 
+		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/version" android:layout_marginLeft="6dp"/>
+			android:text="@string/version"
+			android:layout_marginLeft="6dp" />
 	</LinearLayout>
 	<TextView
 		android:layout_height="wrap_content"
@@ -51,18 +53,5 @@
 		android:layout_marginTop="16dp"
 		android:layout_width="fill_parent"
 		android:text="@string/disclaimer"></TextView>
-	<Button
-		android:layout_height="wrap_content"
-		android:text="Spend 0,99 €"
-		android:layout_below="@+id/textView4"
-		android:layout_alignLeft="@+id/textView4"
-		android:layout_width="fill_parent"
-		android:onClick="buttonClick"
-		android:layout_marginTop="16dp"
-		android:id="@+id/btn_spending" />
-	<ImageView
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@id/btn_spending"
-		android:src="@drawable/sparkleshare_logo" />
+	<ImageView android:layout_width="fill_parent" android:src="@drawable/sparkleshare_logo" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/textView4"></ImageView>
 </RelativeLayout>

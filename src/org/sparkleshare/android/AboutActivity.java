@@ -20,12 +20,4 @@ public class AboutActivity extends BaseActivity {
 		setContentView(R.layout.about);
 		setupActionBar(getString(R.string.info), Color.WHITE);
 	}
-	
-	public void buttonClick(View target) {
-		switch (target.getId()) {
-		case R.id.btn_spending:
-			Toast.makeText(this, getString(R.string.not_implemented_yet), Toast.LENGTH_SHORT).show();
-			break;
-		}
-	}
 }
