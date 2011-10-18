@@ -55,9 +55,9 @@ public class SplashActivity extends Activity {
 		}
 	}
 
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-		if (scanResult != null) {
+		if (scanResult != null && scanResult.getContents() != null) {
 			String content = scanResult.getContents();
 			String url = content.split("sshare:")[1].split("#")[0];
 			String linkcode = content.split("#")[1];
