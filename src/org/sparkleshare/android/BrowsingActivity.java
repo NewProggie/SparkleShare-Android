@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -31,16 +30,12 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -111,32 +106,13 @@ public class BrowsingActivity extends BaseActivity {
 					browseFolder.putExtra("foldername", current.getTitle());
 					startActivity(browseFolder);
 				} else if (current.getType().equals("file")) {
-					File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
-					if (file.exists()) {
-						Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getAbsolutePath()));
-						String extension = MimeTypeMap.getFileExtensionFromUrl(file.getAbsolutePath());
-						String mimetype = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-						open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						open.setAction(android.content.Intent.ACTION_VIEW);
-						open.setDataAndType((Uri.fromFile(file)), mimetype);
-						PackageManager packageManager = getPackageManager();
-						List<ResolveInfo> list = packageManager.queryIntentActivities(open, PackageManager.MATCH_DEFAULT_ONLY);
-						if (list.size() > 0) {
-							startActivity(open);
-						} else {
-							Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_SHORT).show();
-						}
-						startActivity(open);
-					} else {
-						StringBuilder sb = new StringBuilder();
-						sb.append(serverUrl);
-						sb.append("/api/getFile/");
-						sb.append(folderId + "?");
-						sb.append(current.getUrl());
-						current.setListviewPosition(position);
-						current.setUrl(sb.toString());
-						new DownloadFile().execute(current);
-					}
+					Intent showFile = new Intent(context, FileDetailsActivity.class);
+					showFile.putExtra("ListEntryItem", current);
+					showFile.putExtra("ident", ident);
+					showFile.putExtra("authCode", authCode);
+					showFile.putExtra("serverUrl", serverUrl);
+					showFile.putExtra("folderId", folderId);
+					startActivity(showFile);
 				}
 				
 			}
@@ -144,93 +120,7 @@ public class BrowsingActivity extends BaseActivity {
 		return listener;
 	}
 	
-	private class DownloadFile extends AsyncTask<ListEntryItem, Integer, Boolean> {
-		
-		Notification notification;
-		NotificationManager notificationManager;
-		private int maxProgress;
-		ListEntryItem current;
-		
-		@Override
-		protected void onPreExecute() {
-			notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-			Intent notificationIntent = new Intent(context, BrowsingActivity.class);
-			PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-			notification = new Notification(R.drawable.ic_stat_download, "", System.currentTimeMillis());
-			notification.flags = notification.flags | Notification.FLAG_ONGOING_EVENT;
-			notification.contentView = new RemoteViews(getApplicationContext().getPackageName(), R.layout.download_progress);
-			notification.contentIntent = intent;
-		}
-		
-		@Override
-		protected Boolean doInBackground(ListEntryItem... params) {
-			// TODO: Check for connectivity
-			current = params[0];
-			try {
-				HttpClient client = new DefaultHttpClient();
-				HttpGet get = new HttpGet(current.getUrl());
-				Log.d("url", current.getUrl());
-				get.setHeader("X-SPARKLE-IDENT", ident);
-				get.setHeader("X-SPARKLE-AUTH", authCode);
-				HttpResponse response = client.execute(get);
-				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-					publishProgress(0);
-					HttpEntity entity = response.getEntity();
-					if (entity != null) {
-						notification.contentView.setTextViewText(R.id.tv_download_title, current.getTitle());
-						notificationManager.notify(17, notification);
-						File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
-						maxProgress = Integer.valueOf(current.getFilesize());
-						InputStream input = entity.getContent();
-						OutputStream output = new FileOutputStream(file);
-						byte buffer[] = new byte[1024];
-						int count = 0, total = 0;
-						long nextUpdate = System.currentTimeMillis() + 1000;
-						while ((count = input.read(buffer)) > 0) {
-							output.write(buffer, 0, count);
-							total += count;
-							if (System.currentTimeMillis() > nextUpdate) {
-								publishProgress(total);
-								nextUpdate = System.currentTimeMillis() + 1000;
-							}
-						}
-						output.flush();
-						output.close();
-						input.close();
-					}
-				} 
-			} catch (ClientProtocolException e) {
-				Log.e("DownloadFile", e.getLocalizedMessage());
-				return false;
-			} catch (IOException e) {
-				Log.e("DownloadFile", e.getLocalizedMessage());
-				return false;
-			}
-			return true;
-		}
-		
-		@Override
-		protected void onProgressUpdate(Integer... values) {
-			int progress = values[0];
-			notification.contentView.setProgressBar(R.id.pb_download_progressbar, maxProgress, progress, false);
-			notificationManager.notify(17, notification);
-		}
-		
-		@Override
-		protected void onPostExecute(Boolean result) {
-			notificationManager.cancel(17);
-			if (result) {
-				((ListEntryItem) adapter.getItem(current.getListviewPosition())).setSubtitle("✔ " + current.getSubtitle());
-				adapter.notifyDataSetChanged();
-				lvBrowsing.invalidateViews();
-			} else {
-				((ListEntryItem) adapter.getItem(current.getListviewPosition())).setSubtitle(current.getSubtitle());
-				adapter.notifyDataSetChanged();
-				lvBrowsing.invalidateViews();
-				Toast.makeText(context, getString(R.string.downloading_failed), Toast.LENGTH_SHORT).show();
-			}
-		}
-	}
+	
 	
 	
 	private class DownloadFileList extends AsyncTask<String, ListEntryItem, Boolean> {
