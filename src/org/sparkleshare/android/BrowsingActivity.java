@@ -1,14 +1,9 @@
 package org.sparkleshare.android;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -20,11 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.sparkleshare.android.ui.BaseActivity;
 import org.sparkleshare.android.ui.ListEntryItem;
-import org.sparkleshare.android.utils.ExternalDirectory;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -39,7 +30,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 /**
  * Activity for browsing content of a SparkleShare-Dashboard instance.
@@ -206,14 +196,15 @@ public class BrowsingActivity extends BaseActivity {
 					}
 					
 				});
-				addNewActionButton(R.drawable.ic_action_add, R.string.add, new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						Toast.makeText(context, getString(R.string.not_implemented_yet), Toast.LENGTH_SHORT).show();
-					}
-					
-				});
+				/* Will be added in a later version */
+//				addNewActionButton(R.drawable.ic_action_add, R.string.add, new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						Toast.makeText(context, getString(R.string.not_implemented_yet), Toast.LENGTH_SHORT).show();
+//					}
+//					
+//				});
 			} else {
 				setupActionBar(foldername, Color.WHITE);
 				addNewActionButton(R.drawable.ic_action_refresh, R.string.refresh, new OnClickListener() {
