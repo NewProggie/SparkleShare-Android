@@ -78,6 +78,8 @@ public class SplashActivity extends Activity {
 	private boolean isQRCodeAvailable(Context context) {
 		final PackageManager pManager = context.getPackageManager();
 		final Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+		intent.setPackage("com.google.zxing.client.android");
+        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		List<ResolveInfo> list = pManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 		return list.size() > 0;
 	}

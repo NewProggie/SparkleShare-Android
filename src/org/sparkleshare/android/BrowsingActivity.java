@@ -21,6 +21,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -110,7 +111,10 @@ public class BrowsingActivity extends BaseActivity {
 		return listener;
 	}
 	
-	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+	}
 	
 	
 	private class DownloadFileList extends AsyncTask<String, ListEntryItem, Boolean> {
