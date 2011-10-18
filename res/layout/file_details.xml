@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<ImageView
+		android:layout_width="wrap_content"
+		android:id="@+id/iv_file_icon"
+		android:src="@drawable/icon"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="66dp" />
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_below="@+id/iv_file_icon"
+		android:layout_centerHorizontal="true"
+		android:id="@+id/tv_file_name"
+		android:text="SparkleShare.txt" />
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:text="2 KB"
+		android:layout_below="@+id/tv_file_name"
+		android:layout_centerHorizontal="true"
+		android:id="@+id/tv_file_size" />
+	<Button
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:layout_width="fill_parent"
+		android:id="@+id/btn_open_file"
+		android:onClick="buttonClick"
+		android:text="@string/open_file" />
+	<Button
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/btn_open_file"
+		android:layout_centerHorizontal="true"
+		android:layout_width="fill_parent"
+		android:id="@+id/btn_download_file"
+		android:onClick="buttonClick"
+		android:text="@string/download_file"></Button>
+</RelativeLayout>

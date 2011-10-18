@@ -44,4 +44,6 @@
     <string name="copyright">Copyright © 2011</string>
     <string name="authors">Kai Wolf, Hylke Bons and others.</string>
     <string name="disclaimer">SparkleShare is Free and Open Source Software. You are free to use, modify, and redistribute it under the GNU General Public License version 3 or later.</string>
+    <string name="open_file">Open file</string>
+    <string name="download_file">Download file</string>
 </resources>
