@@ -21,5 +21,21 @@ public class MimetypeChecker {
 			return R.drawable.ic_text;
 		}
 	}
+	
+	public static int getLargeIconforMimetype(String mimetype) {
+		if (mimetype.contains("application")) {
+			return R.drawable.application;
+		} else if (mimetype.contains("image")) {
+			return R.drawable.image;
+		} else if (mimetype.contains("text")) {
+			return R.drawable.text;
+		} else if (mimetype.contains("audio")) {
+			return R.drawable.audio;
+		} else if (mimetype.contains("video")) {
+			return R.drawable.video;
+		} else {
+			return R.drawable.text;
+		}
+	}
 
 }

@@ -18,6 +18,7 @@ import org.sparkleshare.android.ui.BaseActivity;
 import org.sparkleshare.android.ui.FormatHelper;
 import org.sparkleshare.android.ui.ListEntryItem;
 import org.sparkleshare.android.utils.ExternalDirectory;
+import org.sparkleshare.android.utils.MimetypeChecker;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -70,6 +71,7 @@ public class FileDetailsActivity extends BaseActivity {
 		btnOpenFile.setEnabled(file.exists());
 
 		setupActionBar(current.getTitle(), Color.WHITE);
+		fileIcon.setImageResource(MimetypeChecker.getLargeIconforMimetype(current.getMimetype()));
 		tvFilename.setText(current.getTitle());
 		tvFileSize.setText(FormatHelper.formatFilesize(current.getFilesize()));
 	}
