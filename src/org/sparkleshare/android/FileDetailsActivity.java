@@ -45,7 +45,7 @@ public class FileDetailsActivity extends BaseActivity {
 	private Context context;
 	private ImageView fileIcon;
 	private TextView tvFilename, tvFileSize;
-	private Button btnDownloadFile, btnOpenFile;
+	private Button btnOpenDownloadFile;
 	private ListEntryItem current;
 	private File file;
 	private String ident, authCode, serverUrl, folderId;
@@ -59,8 +59,7 @@ public class FileDetailsActivity extends BaseActivity {
 		fileIcon = (ImageView) findViewById(R.id.iv_file_icon);
 		tvFilename = (TextView) findViewById(R.id.tv_file_name);
 		tvFileSize = (TextView) findViewById(R.id.tv_file_size);
-		btnDownloadFile = (Button) findViewById(R.id.btn_download_file);
-		btnOpenFile = (Button) findViewById(R.id.btn_open_file);
+		btnOpenDownloadFile = (Button) findViewById(R.id.btn_toggle_open_download_file);
 
 		current = getIntent().getParcelableExtra("ListEntryItem");
 		ident = getIntent().getStringExtra("ident");
@@ -68,7 +67,11 @@ public class FileDetailsActivity extends BaseActivity {
 		serverUrl = getIntent().getStringExtra("serverUrl");
 		folderId = getIntent().getStringExtra("folderId");
 		file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
-		btnOpenFile.setEnabled(file.exists());
+		if (file.exists()) {
+			btnOpenDownloadFile.setText(R.string.open_file);
+		} else {
+			btnOpenDownloadFile.setText(R.string.download_file);
+		}
 
 		setupActionBar(current.getTitle(), Color.WHITE);
 		fileIcon.setImageResource(MimetypeChecker.getLargeIconforMimetype(current.getMimetype()));
@@ -77,17 +80,8 @@ public class FileDetailsActivity extends BaseActivity {
 	}
 
 	public void buttonClick(View target) {
-		switch (target.getId()) {
-		case R.id.btn_download_file:
-			StringBuilder sb = new StringBuilder();
-			sb.append(serverUrl);
-			sb.append("/api/getFile/");
-			sb.append(current.getId() + "?");
-			sb.append(current.getUrl());
-			current.setUrl(sb.toString());
-			new DownloadFile().execute(current);
-			break;
-		case R.id.btn_open_file:
+		String text = ((Button) target).getText().toString();
+		if (text.equals(getString(R.string.open_file))) {
 			Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getAbsolutePath()));
 			String extension = MimeTypeMap.getFileExtensionFromUrl(file.getAbsolutePath());
 			String mimetype = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
@@ -103,7 +97,15 @@ public class FileDetailsActivity extends BaseActivity {
 				Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_SHORT).show();
 			}
 			startActivity(open);
-			break;
+		} else {
+			/* text.equals(R.string.download_file) */
+			StringBuilder sb = new StringBuilder();
+			sb.append(serverUrl);
+			sb.append("/api/getFile/");
+			sb.append(current.getId() + "?");
+			sb.append(current.getUrl());
+			current.setUrl(sb.toString());
+			new DownloadFile().execute(current);
 		}
 	}
 
@@ -186,7 +188,7 @@ public class FileDetailsActivity extends BaseActivity {
 		protected void onPostExecute(Boolean result) {
 			notificationManager.cancel(17);
 			if (result) {
-				btnOpenFile.setEnabled(true);
+				btnOpenDownloadFile.setText(R.string.open_file);
 			} else {
 				Toast.makeText(context, getString(R.string.downloading_failed), Toast.LENGTH_SHORT).show();
 			}

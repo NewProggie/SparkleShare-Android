@@ -33,15 +33,7 @@
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"
 		android:layout_width="fill_parent"
-		android:id="@+id/btn_open_file"
+		android:id="@+id/btn_toggle_open_download_file"
 		android:onClick="buttonClick"
 		android:text="@string/open_file" />
-	<Button
-		android:layout_height="wrap_content"
-		android:layout_above="@+id/btn_open_file"
-		android:layout_centerHorizontal="true"
-		android:layout_width="fill_parent"
-		android:id="@+id/btn_download_file"
-		android:onClick="buttonClick"
-		android:text="@string/download_file"></Button>
 </RelativeLayout>
