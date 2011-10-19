@@ -10,6 +10,7 @@ import org.sparkleshare.android.utils.ExternalDirectory;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +87,8 @@ public class BrowsingAdapter extends BaseAdapter {
 		// TODO: Need to fix this. Refactor in to seperate class
 		if (item.getMimetype() != null) {
 			String mime = item.getMimetype();
+			Log.d("name", item.getTitle());
+			Log.d("mime", mime);
 			if (mime.contains("application")) {
 				viewHolder.icon.setImageResource(R.drawable.ic_application);
 			} else if (mime.contains("image")) {
@@ -96,6 +99,8 @@ public class BrowsingAdapter extends BaseAdapter {
 				viewHolder.icon.setImageResource(R.drawable.ic_folder);
 			} else if (mime.contains("audio")) {
 				viewHolder.icon.setImageResource(R.drawable.ic_audio);
+			} else if (mime.contains("video")) {
+				viewHolder.icon.setImageResource(R.drawable.ic_video);
 			} else {
 				viewHolder.icon.setImageResource(R.drawable.ic_text);
 			}
