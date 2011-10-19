@@ -20,11 +20,11 @@
     <string name="projects">SparkleShare</string>
     <string name="refresh">Refresh</string>
     <string name="upload">Upload</string>
-    <string name="activity_not_found">Sorry. It seems no installed App can handle this type of file</string>
-    <string name="scanner_app_not_found">Sorry. A barcode scanner app to scan a QR Code was not found on this device.</string>
+    <string name="activity_not_found">Sorry, but it seems no installed App can handle this type of file.</string>
+    <string name="scanner_app_not_found">Sorry, but we couldn\'t find a suitable barcode scanner on this device.</string>
     <string name="not_implemented_yet">Not implemented yet</string>
-    <string name="downloading">downloading...</string>
-    <string name="downloading_failed">Sorry, an error occurred while downloading this file</string>
+    <string name="downloading">Downloading...</string>
+    <string name="downloading_failed">Sorry, an error occurred while downloading this file.</string>
     
     <string name="home">Home</string>
     <string name="settings">Settings</string>
@@ -32,7 +32,7 @@
     <string name="sparkleshare_account">Account</string>
     <string name="settings_release_account">Forget account</string>
     <string name="settings_hide_files_folders">Show hidden files</string>
-    <string name="app_version">Version</string>
+    <string name="app_version">version</string>
     <string name="setup_account">Enter link code</string>
     <string name="scan_qrcode">Scan QR code</string>
     <string name="are_you_sure">Are you sure?</string>
@@ -45,6 +45,6 @@
     <string name="copyright">Copyright © 2011</string>
     <string name="authors">Kai Wolf, Hylke Bons and others.</string>
     <string name="disclaimer">SparkleShare is Free and Open Source Software. You are free to use, modify, and redistribute it under the GNU General Public License version 3 or later.</string>
-    <string name="open_file">Open file</string>
-    <string name="download_file">Download file</string>
+    <string name="open_file">Open</string>
+    <string name="download_file">Download</string>
 </resources>
