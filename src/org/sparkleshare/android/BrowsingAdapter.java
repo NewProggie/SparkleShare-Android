@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import org.sparkleshare.android.ui.ListEntryItem;
 import org.sparkleshare.android.utils.ExternalDirectory;
+import org.sparkleshare.android.utils.MimetypeChecker;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -84,26 +85,8 @@ public class BrowsingAdapter extends BaseAdapter {
 			viewHolder.subtitle.setText(item.getSubtitle());
 		}
 		
-		// TODO: Need to fix this. Refactor in to seperate class
 		if (item.getMimetype() != null) {
-			String mime = item.getMimetype();
-			Log.d("name", item.getTitle());
-			Log.d("mime", mime);
-			if (mime.contains("application")) {
-				viewHolder.icon.setImageResource(R.drawable.ic_application);
-			} else if (mime.contains("image")) {
-				viewHolder.icon.setImageResource(R.drawable.ic_image);
-			} else if (mime.contains("text")) {
-				viewHolder.icon.setImageResource(R.drawable.ic_text);
-			} else if (mime.contains("dir")) {
-				viewHolder.icon.setImageResource(R.drawable.ic_folder);
-			} else if (mime.contains("audio")) {
-				viewHolder.icon.setImageResource(R.drawable.ic_audio);
-			} else if (mime.contains("video")) {
-				viewHolder.icon.setImageResource(R.drawable.ic_video);
-			} else {
-				viewHolder.icon.setImageResource(R.drawable.ic_text);
-			}
+			viewHolder.icon.setImageResource(MimetypeChecker.getResIdforMimetype(item.getMimetype()));
 		}
 		return view;
 	}
