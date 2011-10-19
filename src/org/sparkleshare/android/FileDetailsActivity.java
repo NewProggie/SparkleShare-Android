@@ -83,11 +83,9 @@ public class FileDetailsActivity extends BaseActivity {
 		String text = ((Button) target).getText().toString();
 		if (text.equals(getString(R.string.open_file))) {
 			Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getAbsolutePath()));
-			String extension = MimeTypeMap.getFileExtensionFromUrl(file.getAbsolutePath());
-			String mimetype = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
 			open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			open.setAction(android.content.Intent.ACTION_VIEW);
-			open.setDataAndType((Uri.fromFile(file)), mimetype);
+			open.setDataAndType((Uri.fromFile(file)), current.getMimetype());
 			PackageManager packageManager = getPackageManager();
 			List<ResolveInfo> list = packageManager.queryIntentActivities(open,
 					PackageManager.MATCH_DEFAULT_ONLY);
