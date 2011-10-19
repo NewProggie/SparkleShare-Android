@@ -11,7 +11,6 @@ import org.sparkleshare.android.utils.MimetypeChecker;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
