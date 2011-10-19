@@ -10,7 +10,8 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 	private String id;
 	private String type;
 	private String url;
-	private String mimetype;
+	private String mime;
+	private String mimeBase;
 	private String filesize;
 	private int listviewPosition;
 
@@ -23,7 +24,8 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		subtitle = b.getString("subtitle");
 		id = b.getString("id");
 		url = b.getString("url");
-		mimetype = b.getString("mimetype");
+		mime = b.getString("mime");
+		mimeBase = b.getString("mimeBase");
 		filesize = b.getString("filesize");
 		listviewPosition = b.getInt("listviewPosition");
 	}
@@ -35,6 +37,14 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 	public void setListviewPosition(int listviewPosition) {
 		this.listviewPosition = listviewPosition;
 	}
+	
+	public String getMimeBase() {
+		return mimeBase;
+	}
+
+	public void setMimeBase(String mimeBase) {
+		this.mimeBase = mimeBase;
+	}
 
 	public String getFilesize() {
 		return filesize;
@@ -45,11 +55,11 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 	}
 
 	public String getMimetype() {
-		return mimetype;
+		return mime;
 	}
 
 	public void setMimetype(String mimetype) {
-		this.mimetype = mimetype;
+		this.mime = mimetype;
 	}
 
 	public String getTitle() {
@@ -126,7 +136,8 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		b.putString("subtitle", subtitle);
 		b.putString("id", id);
 		b.putString("url", url);
-		b.putString("mimetype", mimetype);
+		b.putString("mime", mime);
+		b.putString("mimeBase", mimeBase);
 		b.putString("filesize", filesize);
 		b.putInt("listviewPosition", listviewPosition);
 		dest.writeBundle(b);

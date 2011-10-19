@@ -164,6 +164,9 @@ public class BrowsingActivity extends BaseActivity {
 						if (json.has("mimeBase")) {
 							item.setMimetype(json.getString("mimeBase"));
 						}
+						if (json.has("mime")) {
+							item.setMimetype(json.getString("mime"));
+						}
 						publishProgress(item);
 					}
 				}
