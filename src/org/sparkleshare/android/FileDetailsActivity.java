@@ -102,7 +102,7 @@ public class FileDetailsActivity extends BaseActivity {
 			StringBuilder sb = new StringBuilder();
 			sb.append(serverUrl);
 			sb.append("/api/getFile/");
-			sb.append(current.getId() + "?");
+			sb.append(folderId + "?");
 			sb.append(current.getUrl());
 			current.setUrl(sb.toString());
 			new DownloadFile().execute(current);
