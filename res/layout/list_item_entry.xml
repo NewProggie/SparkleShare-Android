@@ -4,14 +4,17 @@
 	android:layout_width="fill_parent"
 	android:layout_height="48dp"
 	android:padding="10dp">
+
 	<ImageView
-		android:id="@+id/list_item_icon"
-		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
-		android:layout_alignParentTop="true"
-		android:layout_alignParentBottom="true"
-		android:src="@drawable/icon"
-		android:layout_marginRight="8dp" android:paddingBottom="4dp"/>
+	    android:id="@+id/list_item_icon"
+	    android:layout_width="wrap_content"
+	    android:layout_height="fill_parent"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentTop="true"
+	    android:layout_marginRight="8dp"
+	    android:paddingBottom="4dp"
+	    android:src="@drawable/ic_folder" />
+
 	<TextView
 		android:id="@+id/list_item_title"
 		android:layout_width="fill_parent"
