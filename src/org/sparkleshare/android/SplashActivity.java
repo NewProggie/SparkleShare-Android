@@ -58,7 +58,8 @@ public class SplashActivity extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 		if (scanResult != null && scanResult.getContents() != null) {
-			String content = scanResult.getContents();
+			String content = scanResult.getContents().toLowerCase();
+			
 			String url = content.split("sshare:")[1].split("#")[0];
 			String linkcode = content.split("#")[1];
 			Intent setup = new Intent(context, SetupActivity.class);

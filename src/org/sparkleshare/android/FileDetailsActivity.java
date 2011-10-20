@@ -33,7 +33,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
@@ -80,7 +79,8 @@ public class FileDetailsActivity extends BaseActivity {
 	}
 
 	public void buttonClick(View target) {
-		String text = ((Button) target).getText().toString();
+		Button btn = (Button) target;
+		String text = btn.getText().toString();
 		if (text.equals(getString(R.string.open_file))) {
 			Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getAbsolutePath()));
 			open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -97,6 +97,8 @@ public class FileDetailsActivity extends BaseActivity {
 			startActivity(open);
 		} else {
 			/* text.equals(R.string.download_file) */
+			btn.setText(getString(R.string.downloading));
+			btn.setEnabled(false);
 			StringBuilder sb = new StringBuilder();
 			sb.append(serverUrl);
 			sb.append("/api/getFile/");
@@ -187,6 +189,7 @@ public class FileDetailsActivity extends BaseActivity {
 			notificationManager.cancel(17);
 			if (result) {
 				btnOpenDownloadFile.setText(R.string.open_file);
+				btnOpenDownloadFile.setEnabled(true);
 			} else {
 				Toast.makeText(context, getString(R.string.downloading_failed), Toast.LENGTH_SHORT).show();
 			}

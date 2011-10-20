@@ -3,6 +3,8 @@ package org.sparkleshare.android;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -179,6 +181,9 @@ public class BrowsingActivity extends BaseActivity {
 				Log.e("Browsing failed", e.getLocalizedMessage());
 				return false;
 			} catch (JSONException e) {
+				Log.e("Browsing failed", e.getLocalizedMessage());
+				return false;
+			} catch (URISyntaxException e) {
 				Log.e("Browsing failed", e.getLocalizedMessage());
 				return false;
 			}
