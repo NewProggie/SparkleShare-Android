@@ -57,4 +57,14 @@
 			android:layout_height="wrap_content"
 			android:text="@string/add" android:layout_weight="1" android:layout_width="0dp" android:textColor="@color/grey"/>
 	</LinearLayout>
+
+	<TextView
+	    android:id="@+id/textView1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/tv_link_code"
+	    android:layout_below="@+id/edt_link_code"
+	    android:text="@string/hint_sparkleshare_dashboard"
+	    android:textColor="@color/white" />
+
 </RelativeLayout>
