@@ -61,6 +61,7 @@ public class SettingsActivity extends PreferenceActivity {
 							editor.remove("authCode");
 							editor.commit();
 							Intent backToSetup = new Intent(context, SetupActivity.class);
+							backToSetup.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							startActivity(backToSetup);
 							((Activity) context).finish();
 						}
