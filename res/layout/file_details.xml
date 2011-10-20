@@ -4,22 +4,27 @@
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
+
 	<ImageView
-		android:layout_width="wrap_content"
-		android:id="@+id/iv_file_icon"
-		android:src="@drawable/icon"
-		android:layout_height="wrap_content"
-		android:layout_alignParentTop="true"
-		android:layout_centerHorizontal="true"
-		android:layout_marginTop="66dp" />
+	    android:id="@+id/iv_file_icon"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="10dp"
+	    android:src="@drawable/image" />
+
 	<TextView
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:layout_below="@+id/iv_file_icon"
-		android:layout_centerHorizontal="true"
-		android:id="@+id/tv_file_name"
-		android:text="SparkleShare.txt" />
+	    android:id="@+id/tv_file_name"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/iv_file_icon"
+	    android:layout_centerHorizontal="true"
+	    android:lines="1"
+	    android:singleLine="true"
+	    android:text="SparkleShare.txt"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
