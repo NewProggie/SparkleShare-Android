@@ -25,6 +25,7 @@
     <string name="not_implemented_yet">Not implemented yet</string>
     <string name="downloading">Downloading...</string>
     <string name="downloading_failed">Sorry, an error occurred while downloading this file.</string>
+    <string name="hint_sparkleshare_dashboard">You can find this information on the SparkleShare Dashboard when you choose to link a new device.</string>
     
     <string name="home">Home</string>
     <string name="settings">Settings</string>
