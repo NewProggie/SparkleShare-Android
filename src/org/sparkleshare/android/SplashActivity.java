@@ -7,14 +7,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 /**
  * Splash {@link Activity} which will be shown to user when no previously saved credentials could be found.
- * 
+ *
  * @author kai
- * 
+ *
  */
 public class SplashActivity extends Activity {
 
@@ -39,7 +40,7 @@ public class SplashActivity extends Activity {
 
 	/**
 	 * Will be called when user clicks a button inside this {@link Activity}
-	 * 
+	 *
 	 * @param target
 	 *            Button which was clicked by user
 	 */
@@ -55,16 +56,23 @@ public class SplashActivity extends Activity {
 		}
 	}
 
+        @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 		if (scanResult != null && scanResult.getContents() != null) {
 			String content = scanResult.getContents();
-			String url = content.split("sshare:")[1].split("#")[0];
-			String linkcode = content.split("#")[1];
-			Intent setup = new Intent(context, SetupActivity.class);
-			setup.putExtra("url", url);
-			setup.putExtra("linkcode", linkcode);
-			startActivity(setup);
+                        if (!content.startsWith("SSHARE:") || !content.contains("#")) {
+                            Toast.makeText(context, "Invalid QR code", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String res = content.substring(7);
+                            String url = res.substring(0, res.lastIndexOf("#"));
+                            String linkcode = res.substring(res.lastIndexOf("#") + 1);
+
+                            Intent setup = new Intent(context, SetupActivity.class);
+                            setup.putExtra("url", url);
+                            setup.putExtra("linkcode", linkcode);
+                            startActivity(setup);
+                        }
 		}
 	}
 
