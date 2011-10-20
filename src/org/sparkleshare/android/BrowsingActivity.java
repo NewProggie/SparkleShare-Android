@@ -153,7 +153,8 @@ public class BrowsingActivity extends BaseActivity {
 						String type = json.getString("type");
 						if (type.equals("git")) {
 							isProjectsDirectory = true;
-							item.setSubtitle(serverUrl);
+							URI uri = new URI(serverUrl);
+							item.setSubtitle(uri.getHost());
 						} if (type.equals("file")) {
 							item.setFilesize(json.getString("fileSize"));
 						}
