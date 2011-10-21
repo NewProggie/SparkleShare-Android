@@ -153,6 +153,7 @@ public class SetupActivity extends BaseActivity {
     		try {
     			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         		nameValuePairs.add(new BasicNameValuePair("code", edtLinkcode.getText().toString()));
+        		nameValuePairs.add(new BasicNameValuePair("name", android.os.Build.MODEL));
 				post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				HttpResponse response = client.execute(post);
 				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
