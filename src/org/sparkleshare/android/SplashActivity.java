@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -59,13 +60,17 @@ public class SplashActivity extends Activity {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 		if (scanResult != null && scanResult.getContents() != null) {
 			String content = scanResult.getContents().toLowerCase();
+			if (!content.startsWith("sshare:") || !content.contains("#")) {
+				Toast.makeText(context, getString(R.string.invalid_qr_code), Toast.LENGTH_SHORT).show();
+			} else {
+				String url = content.split("sshare:")[1].split("#")[0];
+				String linkcode = content.split("#")[1];
+				Intent setup = new Intent(context, SetupActivity.class);
+				setup.putExtra("url", url);
+				setup.putExtra("linkcode", linkcode);
+				startActivity(setup);
+			}
 			
-			String url = content.split("sshare:")[1].split("#")[0];
-			String linkcode = content.split("#")[1];
-			Intent setup = new Intent(context, SetupActivity.class);
-			setup.putExtra("url", url);
-			setup.putExtra("linkcode", linkcode);
-			startActivity(setup);
 		}
 	}
 
