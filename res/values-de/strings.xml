@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SparkleShare</string>
+    <string name="version">1.0</string>
+    <string name="welcome_sparkleshare">Willkommen zu SparkleShare!</string>
+    <string name="address">Adresse</string>
+    <string name="host_hint">Domain Name oder IP-Adresse</string>
+    <string name="folder_name">Ordnername:</string>
+    <string name="folder_name_hint">/home/user/repositoryname.git</string>
+    <string name="email_address">Email-Adresse</string>
+    <string name="username">Benutzername</string>
+    <string name="password">Passwort</string>
+    <string name="link_code">Link code</string>
+    <string name="submit">Ok</string>
+    <string name="please_wait">Bitte warten...</string>
+    <string name="login_error">Entschuldigung, der Server scheint derzeit nicht erreichbar zu sein...</string>
+    <string name="close">Schließen</string>
+    <string name="add_project">Projekt hinzufügen</string>
+    <string name="adding_project">Füge Projekt hinzu...</string>
+    <string name="projects">SparkleShare</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="upload">Upload</string>
+    <string name="activity_not_found">Entschuldigung, es scheint, also sei Barcode Scanner auf diesem Gerät nicht installiert.</string>
+    <string name="scanner_app_not_found">Entschuldigung, es scheint, also sei Barcode Scanner auf diesem Gerät nicht installiert.</string>
+    <string name="not_implemented_yet">Noch nicht implementiert</string>
+    <string name="downloading">Downloading...</string>
+    <string name="downloading_failed">Entschuldigung, beim Herunterladen ist ein Fehler aufgetreten.</string>
+    <string name="hint_sparkleshare_dashboard">Diese Information befindet sich im SparkleShare Dashboard Interface unter dem Punkt: link new device.</string>
+    <string name="invalid_qr_code">Ungültiger QR-Code</string>
+        
+    <string name="home">Home</string>
+    <string name="settings">Einstellungen</string>
+    <string name="info">Über SparkleShare</string>
+    <string name="sparkleshare_account">Account</string>
+    <string name="settings_release_account">Account löschen</string>
+    <string name="settings_hide_files_folders">Zeige versteckte Dateien</string>
+    <string name="app_version">version</string>
+    <string name="setup_account">Link Code eingeben</string>
+    <string name="scan_qrcode">QR-Code einlesen</string>
+    <string name="are_you_sure">Bist du sicher?</string>
+    <string name="release_account_hint">Soll der aktuelle Account wirklich gelöscht werden?</string>
+    <string name="release">Vergessen</string>
+    <string name="cancel">Rückgängig</string>
+    <string name="get_started">Füge ein neues Projekt hinzu:</string>
+    <string name="never_mind">Egal</string>
+    <string name="add">Hinzufügen</string>
+    <string name="copyright">Copyright © 2011</string>
+    <string name="authors">Kai Wolf, Hylke Bons und andere.</string>
+    <string name="disclaimer">SparkleShare is Free and Open Source Software. You are free to use, modify, and redistribute it under the GNU General Public License version 3 or later.</string>
+    <string name="open_file">Öffnen</string>
+    <string name="download_file">Download</string>
+</resources>
