@@ -11,12 +11,20 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sparkleshare.android.ui.BaseActivity;
 import org.sparkleshare.android.ui.ListEntryItem;
+import org.transdroid.util.FakeSocketFactory;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -126,13 +134,26 @@ public class BrowsingActivity extends BaseActivity {
 		protected void onPreExecute() {
 		}
 		
+		private HttpClient getNewHttpClient() {
+    		SharedPreferences sp = SettingsActivity.getSettings(BrowsingActivity.this);
+    		boolean acceptAll = sp.getBoolean(getResources().getString(R.string.settings_accept_all_certificates), false);
+    		
+    		SchemeRegistry s = new SchemeRegistry();
+    		s.register(new Scheme("http", new PlainSocketFactory(), 80));
+    		s.register(new Scheme("https", acceptAll ? new FakeSocketFactory() : SSLSocketFactory.getSocketFactory(), 443));
+    		
+    		HttpParams httpParams = new BasicHttpParams();
+    		
+    		return new DefaultHttpClient(new ThreadSafeClientConnManager(httpParams, s), httpParams);
+    	}
+		
 		@Override
 		protected Boolean doInBackground(String... params) {
 			String server = params[0];
 			
 			try {
 				// TODO: Refactor I/O here and in SetupActivity to central place
-				HttpClient client = new DefaultHttpClient();
+				HttpClient client = getNewHttpClient();
 				HttpGet get = new HttpGet(server);
 				get.setHeader("X-SPARKLE-IDENT", ident);
 				get.setHeader("X-SPARKLE-AUTH", authCode);
