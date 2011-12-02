@@ -31,6 +31,7 @@ import org.transdroid.util.FakeSocketFactory;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -95,15 +96,12 @@ public class FileDetailsActivity extends BaseActivity {
 			open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			open.setAction(android.content.Intent.ACTION_VIEW);
 			open.setDataAndType((Uri.fromFile(file)), current.getMimetype());
-			PackageManager packageManager = getPackageManager();
-			List<ResolveInfo> list = packageManager.queryIntentActivities(open,
-					PackageManager.MATCH_DEFAULT_ONLY);
-			if (list.size() > 0) {
+			
+			try {
 				startActivity(open);
-			} else {
+			} catch(ActivityNotFoundException e) {
 				Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_SHORT).show();
 			}
-			startActivity(open);
 		} else {
 			/* text.equals(R.string.download_file) */
 			btn.setText(getString(R.string.downloading));
