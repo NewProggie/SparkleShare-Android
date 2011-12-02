@@ -4,8 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -14,11 +20,21 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sparkleshare.android.ui.BaseActivity;
+import org.transdroid.util.FakeSocketFactory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,6 +54,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 
 /**
  * This {@link Activity} handles a new setup for a SparkleShare instance.
@@ -145,9 +162,22 @@ public class SetupActivity extends BaseActivity {
     		loadingDialog = ProgressDialog.show(context, "", getString(R.string.adding_project));
     	}
     	
+    	private HttpClient getNewHttpClient() {
+    		SharedPreferences sp = SettingsActivity.getSettings(SetupActivity.this);
+    		boolean acceptAll = sp.getBoolean(getResources().getString(R.string.settings_accept_all_certificates), false);
+    		
+    		SchemeRegistry s = new SchemeRegistry();
+    		s.register(new Scheme("http", new PlainSocketFactory(), 80));
+    		s.register(new Scheme("https", acceptAll ? new FakeSocketFactory() : SSLSocketFactory.getSocketFactory(), 443));
+    		
+    		HttpParams httpParams = new BasicHttpParams();
+    		
+    		return new DefaultHttpClient(new ThreadSafeClientConnManager(httpParams, s), httpParams);
+    	}
+    	
     	@Override
     	protected Boolean doInBackground(String... params) {
-    		HttpClient client = new DefaultHttpClient();
+    		HttpClient client = getNewHttpClient();
     		serverUrl = params[0];
     		HttpPost post = new HttpPost(serverUrl + AUTH_SUFFIX);
     		try {
