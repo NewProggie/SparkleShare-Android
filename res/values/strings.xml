@@ -34,6 +34,8 @@
     <string name="sparkleshare_account">Account</string>
     <string name="settings_release_account">Forget account</string>
     <string name="settings_hide_files_folders">Show hidden files</string>
+    <string name="sparkleshare_security">Security</string>
+    <string name="settings_accept_all_certificates">Accept all SSL certificates</string>
     <string name="app_version">version</string>
     <string name="setup_account">Enter link code</string>
     <string name="scan_qrcode">Scan QR code</string>

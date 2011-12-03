@@ -8,6 +8,12 @@
 			android:key="@string/settings_hide_files_folders"
 			android:title="@string/settings_hide_files_folders" />
 	</PreferenceCategory>
+	<PreferenceCategory 
+	    	android:title="@string/sparkleshare_security">
+	    	<CheckBoxPreference 
+	    	    android:key="@string/settings_accept_all_certificates"
+	    	    android:title="@string/settings_accept_all_certificates" />
+	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/info">
 		<Preference 
 			android:key="@string/app_version"
