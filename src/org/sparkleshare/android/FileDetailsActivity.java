@@ -1,11 +1,18 @@
 package org.sparkleshare.android;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.List;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.CharBuffer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,8 +42,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -76,7 +81,8 @@ public class FileDetailsActivity extends BaseActivity {
 		serverUrl = getIntent().getStringExtra("serverUrl");
 		folderId = getIntent().getStringExtra("folderId");
 		file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
-		if (file.exists()) {
+		if (file.exists() &&
+				compareHash()) {
 			btnOpenDownloadFile.setText(R.string.open_file);
 		} else {
 			btnOpenDownloadFile.setText(R.string.download_file);
@@ -86,6 +92,26 @@ public class FileDetailsActivity extends BaseActivity {
 		fileIcon.setImageResource(MimetypeChecker.getLargeIconforMimetype(current.getMimetype()));
 		tvFilename.setText(current.getTitle());
 		tvFileSize.setText(FormatHelper.formatFilesize(current.getFilesize()));
+	}
+	
+	private boolean compareHash() {
+		File f = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle() + ".hash");
+		try {
+			char[] hash = new char[42];
+			FileInputStream in = new FileInputStream(f);
+			InputStreamReader r = new InputStreamReader(in);
+			
+			r.read(hash);
+			
+			r.close();
+			
+			String sHash = new String(hash).trim();
+			
+			return sHash.equals(current.getHash());
+			
+		} catch (IOException e) {
+			return true; // ???
+		}
 	}
 
 	public void buttonClick(View target) {
@@ -193,6 +219,21 @@ public class FileDetailsActivity extends BaseActivity {
 				Log.e("DownloadFile", e.getLocalizedMessage());
 				return false;
 			}
+			
+			File hashFile = new File(ExternalDirectory.getExternalRootDirectory() + "/"
+					+ current.getTitle() + ".hash");
+			Writer w;
+			
+			try {
+				w = new FileWriter(hashFile);
+				w.write(current.getHash());
+				
+				w.flush();
+				w.close();
+			} catch(IOException e) {
+				Log.e("DownloadFile", "Could not write hash file: " + e.getLocalizedMessage());
+			}
+			
 			return true;
 		}
 

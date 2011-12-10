@@ -13,6 +13,7 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 	private String mime;
 	private String mimeBase;
 	private String filesize;
+	private String hash;
 	private int listviewPosition;
 
 	public ListEntryItem() {
@@ -24,6 +25,7 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		subtitle = b.getString("subtitle");
 		id = b.getString("id");
 		url = b.getString("url");
+		hash = b.getString("hash");
 		mime = b.getString("mime");
 		mimeBase = b.getString("mimeBase");
 		filesize = b.getString("filesize");
@@ -139,8 +141,17 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		b.putString("mime", mime);
 		b.putString("mimeBase", mimeBase);
 		b.putString("filesize", filesize);
+		b.putString("hash", hash);
 		b.putInt("listviewPosition", listviewPosition);
 		dest.writeBundle(b);
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 	public static final Parcelable.Creator<ListEntryItem> CREATOR = new Creator<ListEntryItem>() {

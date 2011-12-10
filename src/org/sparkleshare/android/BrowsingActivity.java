@@ -167,6 +167,11 @@ public class BrowsingActivity extends BaseActivity {
 						sb.append(line + NL);
 					}
 					in.close();
+					
+					System.err.println("\n\n--Server response\n");
+					System.err.println(sb.toString());
+					System.err.println("\n--End server response\n\n");
+					
 					JSONArray folderList = new JSONArray(sb.toString());
 					for (int i=0; i<folderList.length(); i++) {
 						JSONObject json = folderList.getJSONObject(i);
@@ -180,6 +185,7 @@ public class BrowsingActivity extends BaseActivity {
 							item.setSubtitle(uri.getHost());
 						} if (type.equals("file")) {
 							item.setFilesize(json.getString("fileSize"));
+							item.setHash(json.getString("hash"));
 						}
 						
 						item.setType(json.getString("type"));
