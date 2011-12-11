@@ -52,6 +52,7 @@ public class FileDetailsActivity extends BaseActivity {
 	private ImageView fileIcon;
 	private TextView tvFilename, tvFileSize;
 	private Button btnOpenDownloadFile;
+	private Button btnRedownloadFile;
 	private ListEntryItem current;
 	private File file;
 	private String ident, authCode, serverUrl, folderId;
@@ -66,6 +67,7 @@ public class FileDetailsActivity extends BaseActivity {
 		tvFilename = (TextView) findViewById(R.id.tv_file_name);
 		tvFileSize = (TextView) findViewById(R.id.tv_file_size);
 		btnOpenDownloadFile = (Button) findViewById(R.id.btn_toggle_open_download_file);
+		btnRedownloadFile = (Button) findViewById(R.id.btn_redownload_file);
 
 		current = getIntent().getParcelableExtra("ListEntryItem");
 		ident = getIntent().getStringExtra("ident");
@@ -75,7 +77,9 @@ public class FileDetailsActivity extends BaseActivity {
 		file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
 		if (file.exists()) {
 			btnOpenDownloadFile.setText(R.string.open_file);
+			btnRedownloadFile.setVisibility(View.VISIBLE);
 		} else {
+			btnRedownloadFile.setVisibility(View.GONE);
 			btnOpenDownloadFile.setText(R.string.download_file);
 		}
 
@@ -85,7 +89,7 @@ public class FileDetailsActivity extends BaseActivity {
 		tvFileSize.setText(FormatHelper.formatFilesize(current.getFilesize()));
 	}
 
-	public void buttonClick(View target) {
+	public void openDownloadButtonClick(View target) {
 		Button btn = (Button) target;
 		String text = btn.getText().toString();
 		if (text.equals(getString(R.string.open_file))) {
@@ -100,16 +104,25 @@ public class FileDetailsActivity extends BaseActivity {
 			}
 		} else {
 			/* text.equals(R.string.download_file) */
-			btn.setText(getString(R.string.downloading));
-			btn.setEnabled(false);
-			StringBuilder sb = new StringBuilder();
-			sb.append(serverUrl);
-			sb.append("/api/getFile/");
-			sb.append(folderId + "?");
-			sb.append(current.getUrl());
-			current.setUrl(sb.toString());
-			new DownloadFile().execute(current);
+			downloadFile(btn);
 		}
+	}
+
+	public void redownloadButtonClick(View target) {
+		btnOpenDownloadFile.setEnabled(false);
+		downloadFile((Button) target);
+	}
+
+	private void downloadFile(Button btn) {
+		btn.setText(getString(R.string.downloading));
+		btn.setEnabled(false);
+		StringBuilder sb = new StringBuilder();
+		sb.append(serverUrl);
+		sb.append("/api/getFile/");
+		sb.append(folderId + "?");
+		sb.append(current.getUrl());
+		current.setUrl(sb.toString());
+		new DownloadFile().execute(current);
 	}
 
 	private class DownloadFile extends AsyncTask<ListEntryItem, Integer, Boolean> {
@@ -129,17 +142,17 @@ public class FileDetailsActivity extends BaseActivity {
 			notification.contentView = new RemoteViews(getApplicationContext().getPackageName(),
 					R.layout.download_progress);
 			notification.contentIntent = intent;
-			
+
 		}
-		
+
 		private HttpClient getNewHttpClient() {
 			SharedPreferences sp = SettingsActivity.getSettings(FileDetailsActivity.this);
 			boolean acceptAll = sp.getBoolean(getResources().getString(R.string.settings_accept_all_certificates), false);
-			
+
 			SchemeRegistry s = new SchemeRegistry();
 			s.register(new Scheme("http", new PlainSocketFactory(), 80));
 			s.register(new Scheme("https", acceptAll ? new FakeSocketFactory() : SSLSocketFactory.getSocketFactory(), 443));
-			
+
 			HttpParams httpParams = new BasicHttpParams();
 			return new DefaultHttpClient(new ThreadSafeClientConnManager(httpParams, s), httpParams);
 		}
@@ -205,6 +218,9 @@ public class FileDetailsActivity extends BaseActivity {
 			if (result) {
 				btnOpenDownloadFile.setText(R.string.open_file);
 				btnOpenDownloadFile.setEnabled(true);
+				btnRedownloadFile.setText(R.string.redownload_file);
+				btnRedownloadFile.setEnabled(true);
+				btnRedownloadFile.setVisibility(View.VISIBLE);
 			} else {
 				Toast.makeText(context, getString(R.string.downloading_failed), Toast.LENGTH_SHORT).show();
 			}
