@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">СпарклШер</string>
+  <string name="app_name">SparkleShare</string>
   <string name="version">1.0</string>
-  <string name="welcome_sparkleshare">Добродошли у СпарклШер</string>
+  <string name="welcome_sparkleshare">Добродошли у SparkleShare </string>
   <string name="address">Адреса</string>
-  <string name="host_hint">домен или ИП адреса</string>
+  <string name="host_hint">домен или IP адреса</string>
   <string name="folder_name">Назив фолдера:</string>
   <string name="folder_name_hint">/home/user/repositoryname.git</string>
   <string name="email_address">Адреса е-поште</string>
@@ -17,19 +17,19 @@
   <string name="close">Затвори</string>
   <string name="add_project">Додај пројекат</string>
   <string name="adding_project">Додајем пројекат...</string>
-  <string name="projects">СпарклШер</string>
+  <string name="projects">SparkleShare</string>
   <string name="refresh">Освежи</string>
   <string name="upload">Отпреми</string>
   <string name="activity_not_found">Нажалост, изгледа немате инсталирану апликацију која може да отвори овај тип датотеке.</string>
   <string name="scanner_app_not_found">Нажалост, не могу да пронађем одговарајући баркод скенер на вашем уређају.</string>
   <string name="not_implemented_yet">Још увек није завршено</string>
-  <string name="downloading">Преузимам...</string>
+  <string name="downloading">Преузимање...</string>
   <string name="downloading_failed">Нажалост, дошло је до грешке при преузимању ове датотеке.</string>
-  <string name="hint_sparkleshare_dashboard">Ово можете видети на СпарклШер Контролној табли када изаберете да повежете нови уређај</string>
+  <string name="hint_sparkleshare_dashboard">Ово можете видети на SparkleShare Контролној табли када изаберете да повежете нови уређај</string>
   <string name="invalid_qr_code">Погрешан QR код</string>
-  <string name="home">Почетак</string>
+  <string name="home">Почетна</string>
   <string name="settings">Подешавања</string>
-  <string name="info">О СпарклШеру</string>
+  <string name="info">О SparkleShare</string>
   <string name="sparkleshare_account">Налог</string>
   <string name="settings_release_account">Заборави налог</string>
   <string name="settings_hide_files_folders">Прикажи скривене датотеке</string>
@@ -45,7 +45,7 @@
   <string name="add">Додај</string>
   <string name="copyright">Copyright © 2011</string>
   <string name="authors">Kai Wolf, Hylke Bons и остали.</string>
-  <string name="disclaimer">СпарклеШер је софтвер слободног и отвореног кода. Имате слободу да га корисите, мењате и редистрибуирате под условима ГНУ Опте Јавне Лиценце верзија 3 или каснија.</string>
+  <string name="disclaimer">SparkleShare је софтвер слободног и отвореног кода. Имате слободу да га корисите, мењате и редистрибуирате под условима ГНУ Опште Јавне Лиценце верзија 3 или каснија.</string>
   <string name="open_file">Отвори</string>
   <string name="download_file">Преузми</string>
 </resources>
