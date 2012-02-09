@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,7 +18,7 @@ import com.google.zxing.integration.android.IntentResult;
  * @author kai
  * 
  */
-public class SplashActivity extends Activity {
+public class WelcomeActivity extends FragmentActivity {
 
 	private Context context;
 
@@ -25,7 +26,7 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		setContentView(R.layout.splash);
+		setContentView(R.layout.welcome_fragment);
 
 		/* Found credentials, forwarding to BrowsingActivity */
 		SharedPreferences prefs = SettingsActivity.getSettings(this);
