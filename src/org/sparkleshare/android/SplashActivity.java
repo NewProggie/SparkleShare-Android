@@ -51,7 +51,8 @@ public class SplashActivity extends Activity {
 			startActivity(setup);
 			break;
 		case R.id.btn_scan_qrcode:
-			IntentIntegrator.initiateScan(this);
+			IntentIntegrator integrater = new IntentIntegrator(this);
+			integrater.initiateScan();
 			break;
 		}
 	}
