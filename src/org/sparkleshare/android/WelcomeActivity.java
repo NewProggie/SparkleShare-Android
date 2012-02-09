@@ -3,7 +3,6 @@ package org.sparkleshare.android;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -27,18 +26,8 @@ public class WelcomeActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		context = this;
 		setContentView(R.layout.welcome_fragment);
-
-		/* Found credentials, forwarding to BrowsingActivity */
-		SharedPreferences prefs = SettingsActivity.getSettings(this);
-		if (prefs.contains("ident")) {
-			Intent browseData = new Intent(this, BrowsingActivity.class);
-			String serverUrl = prefs.getString("serverUrl", "");
-			browseData.putExtra("url", serverUrl + "/api/getFolderList");
-			startActivity(browseData);
-			this.finish();
-		}
 	}
-
+	
 	/**
 	 * Will be called when user clicks a button inside this {@link Activity}
 	 * 
@@ -57,17 +46,17 @@ public class WelcomeActivity extends FragmentActivity {
 			break;
 		}
 	}
-
+	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 		if (scanResult != null && scanResult.getContents() != null) {
 			String content = scanResult.getContents().toLowerCase();
 			if (!content.startsWith("sshare:") || !content.contains("#")) {
-				Toast.makeText(context, getString(R.string.invalid_qr_code), Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, getString(R.string.invalid_qr_code), Toast.LENGTH_SHORT).show();
 			} else {
 				String url = content.split("sshare:")[1].split("#")[0];
 				String linkcode = content.split("#")[1];
-				Intent setup = new Intent(context, SetupActivity.class);
+				Intent setup = new Intent(this, SetupActivity.class);
 				setup.putExtra("url", url);
 				setup.putExtra("linkcode", linkcode);
 				startActivity(setup);
