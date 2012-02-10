@@ -1,5 +1,7 @@
 package org.sparkleshare.android.ui;
 
+import org.sparkleshare.android.utils.FormatHelper;
+
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;

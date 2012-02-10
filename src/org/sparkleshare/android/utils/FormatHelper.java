@@ -1,4 +1,4 @@
-package org.sparkleshare.android.ui;
+package org.sparkleshare.android.utils;
 
 public class FormatHelper {
 

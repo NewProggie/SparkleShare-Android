@@ -25,6 +25,7 @@ import org.sparkleshare.android.R;
 import org.sparkleshare.android.SettingsActivity;
 import org.sparkleshare.android.utils.ExternalDirectory;
 import org.sparkleshare.android.utils.FakeSocketFactory;
+import org.sparkleshare.android.utils.FormatHelper;
 import org.sparkleshare.android.utils.MimetypeChecker;
 
 import android.app.Notification;

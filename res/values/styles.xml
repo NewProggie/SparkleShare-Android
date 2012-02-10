@@ -1,46 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="ApplicationStyle" parent="@android:style/Theme.NoTitleBar">
-    	<item name="actionbarSeparatorStyle">@style/ActionBarSeparator</item>
-    	<item name="actionbarTextStyle">@style/ActionBarText</item>
-    	<item name="actionbarButtonStyle">@style/ActionBarButton</item>
     </style>
-    <style name="ActionBar">
-    	<item name="android:layout_width">fill_parent</item>
-    	<item name="android:layout_height">@dimen/actionbar_height</item>
-    	<item name="android:gravity">center_vertical</item>
-    	<item name="android:orientation">horizontal</item>
-    	<item name="android:background">@drawable/actionbar_background</item>
-    </style>
-    <style name="ActionBarButton">
-		<item name="android:layout_width">@dimen/actionbar_height</item>
-		<item name="android:layout_height">fill_parent</item>
-		<item name="android:scaleType">center</item>
-		<item name="android:background">@drawable/actionbar_button_selector</item>
-	</style>
-	<style name="ActionBarSeparator">
-		<item name="android:layout_width">2px</item>
-		<item name="android:layout_height">fill_parent</item>
-		<item name="android:background">@drawable/actionbar_separator</item>
-	</style>
-	<style name="ActionBarText">
-		<item name="android:id">@+id/actionbar_text</item>
-		<item name="android:layout_width">0dp</item>
-		<item name="android:layout_height">fill_parent</item>
-		<item name="android:layout_weight">1</item>
-		<item name="android:gravity">center_vertical</item>
-		<item name="android:textSize">@dimen/text_size_large</item>
-		<item name="android:paddingLeft">12dp</item>
-		<item name="android:paddingRight">12dp</item>
-		<item name="android:textStyle">bold</item>
-		<item name="android:textColor">@color/actionbar_text</item>
-		<item name="android:shadowColor">@color/actionbar_text_shadow</item>
-		<item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">0.00001</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">end</item>
-	</style>
+
 	<style name="ShadowedWhiteText">
 		<item name="android:textColor">@color/white</item>
 		<item name="android:shadowColor">@color/black</item>
