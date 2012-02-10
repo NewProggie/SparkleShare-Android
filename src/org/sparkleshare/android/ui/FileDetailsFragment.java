@@ -74,6 +74,7 @@ public class FileDetailsFragment extends Fragment {
 		
 		Intent actIntent = getActivity().getIntent();
 		current = actIntent.getParcelableExtra("ListEntryItem");
+		getActivity().setTitle(current.getTitle());
 		ident = actIntent.getStringExtra("ident");
 		authCode = actIntent.getStringExtra("authCode");
 		serverUrl = actIntent.getStringExtra("serverUrl");

@@ -20,6 +20,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class WelcomeActivity extends FragmentActivity {
 
 	private Context context;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

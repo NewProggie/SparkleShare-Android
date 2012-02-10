@@ -2,6 +2,7 @@ package org.sparkleshare.android;
 
 import java.io.File;
 
+import org.sparkleshare.android.actionbarcompat.ActionBarActivity;
 import org.sparkleshare.android.ui.FileDetailsFragment;
 import org.sparkleshare.android.ui.ListEntryItem;
 import org.sparkleshare.android.utils.ExternalDirectory;
@@ -10,18 +11,16 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FileDetailsActivity extends FragmentActivity {
+public class FileDetailsActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.filedownload_fragment);
-
 	}
 
 	public void buttonClick(View target) {

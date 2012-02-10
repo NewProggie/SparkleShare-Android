@@ -126,6 +126,8 @@ public class BrowsingFragment extends Fragment {
 	
 	private class DownloadFileList extends AsyncTask<String, ListEntryItem, Boolean> {
 			
+		private boolean isProjectsDirectory = false;
+		
 		@Override
 		protected void onPreExecute() {
 		}
@@ -170,6 +172,7 @@ public class BrowsingFragment extends Fragment {
 						item.setId(json.getString("id"));
 						String type = json.getString("type");
 						if (type.equals("git")) {
+							isProjectsDirectory = true;
 							URI uri = new URI(serverUrl);
 							item.setSubtitle(uri.getHost());
 						} if (type.equals("file")) {
@@ -210,6 +213,33 @@ public class BrowsingFragment extends Fragment {
 			adapter.addEntry(values[0]);
 		}
 		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (isProjectsDirectory) {
+				getActivity().setTitle(getString(R.string.projects));
+//				addNewActionButton(R.drawable.ic_action_info, R.string.info, new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						Intent showAboutScreen = new Intent(context, AboutActivity.class);
+//						startActivity(showAboutScreen);
+//					}
+//
+//				});
+			} else {
+				getActivity().setTitle(foldername);
+//				addNewActionButton(R.drawable.ic_action_refresh, R.string.refresh, new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						Intent refreshList = new Intent(context, BrowsingActivity.class);
+//						refreshList.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//						refreshList.putExtra("url", currentUrl);
+//						startActivity(refreshList);
+//					}
+//				});
+			}
+		}
 		
 	}
 }

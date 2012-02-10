@@ -1,11 +1,11 @@
 package org.sparkleshare.android;
 
+import org.sparkleshare.android.actionbarcompat.ActionBarActivity;
 import org.sparkleshare.android.ui.SetupFragment;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +14,7 @@ import android.widget.Button;
  * @author kai
  *
  */
-public class SetupActivity extends FragmentActivity {
+public class SetupActivity extends ActionBarActivity {
 	
 	private Context context;
 	
@@ -24,7 +24,7 @@ public class SetupActivity extends FragmentActivity {
         context = this;
     
         setContentView(R.layout.setup_fragment);
-        //setupActionBarWithoutHomeButton(getString(R.string.add_project), Color.BLACK);
+        setTitle(getString(R.string.add_project));
 
         if (getIntent().getStringExtra("url") != null && getIntent().getStringExtra("linkcode") != null) {
         	/* processing scanned QR code */

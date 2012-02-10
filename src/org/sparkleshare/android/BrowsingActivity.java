@@ -1,14 +1,15 @@
 package org.sparkleshare.android;
 
+import org.sparkleshare.android.actionbarcompat.ActionBarActivity;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 /**
  * Activity for browsing content of a SparkleShare-Dashboard instance.
  * @author kai
  *
  */
-public class BrowsingActivity extends FragmentActivity {
+public class BrowsingActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
