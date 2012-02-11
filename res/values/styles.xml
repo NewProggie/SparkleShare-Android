@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ApplicationStyle" parent="android:style/Theme.Light">
+    <style name="ApplicationStyle" parent="android:style/Theme.Black">
         <item name="android:windowTitleSize">@dimen/actionbar_compat_height</item>
         <item name="android:windowTitleBackgroundStyle">@style/ActionBarCompat</item>
         <item name="android:windowContentOverlay">@drawable/actionbar_shadow</item>
@@ -36,7 +36,6 @@
         <!-- layout_width/height/weight must be set in code -->
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/text_size_large</item>
-        
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:textStyle">bold</item>
