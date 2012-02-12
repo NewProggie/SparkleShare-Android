@@ -17,8 +17,6 @@
 
     <style name="ActionBarCompat">
         <item name="android:background">@drawable/actionbar_background</item>
-        <item name="android:paddingLeft">6dp</item>
-        <item name="android:paddingRight">6dp</item>
     </style>
 
     <style name="ActionBarCompatItemBase">
@@ -42,6 +40,8 @@
         <item name="android:shadowColor">@color/actionbar_text_shadow</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">1</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
     </style>
 
     <style name="ActionBarCompatTitle" parent="style/ActionBarCompatTitleBase">

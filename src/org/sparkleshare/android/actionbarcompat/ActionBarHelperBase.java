@@ -17,11 +17,13 @@
 package org.sparkleshare.android.actionbarcompat;
 
 import org.sparkleshare.android.R;
+import org.sparkleshare.android.WelcomeActivity;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.view.InflateException;

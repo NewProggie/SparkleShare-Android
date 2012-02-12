@@ -27,8 +27,10 @@ import org.sparkleshare.android.BrowsingAdapter;
 import org.sparkleshare.android.FileDetailsActivity;
 import org.sparkleshare.android.R;
 import org.sparkleshare.android.SettingsActivity;
+import org.sparkleshare.android.actionbarcompat.ActionBarActivity;
 import org.sparkleshare.android.utils.FakeSocketFactory;
 
+import android.R.color;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -63,6 +65,7 @@ public class BrowsingFragment extends Fragment {
 		lvBrowsing = new ListView(getActivity());
 		adapter = new BrowsingAdapter(getActivity());
 		lvBrowsing.setAdapter(adapter);
+		lvBrowsing.setCacheColorHint(color.background_dark);
 		lvBrowsing.setOnItemClickListener(onListItemClick());
 		
 		
@@ -130,6 +133,7 @@ public class BrowsingFragment extends Fragment {
 		
 		@Override
 		protected void onPreExecute() {
+			((BrowsingActivity) getActivity()).setRefreshingState(true);
 		}
 		
 		private HttpClient getNewHttpClient() {
@@ -215,30 +219,8 @@ public class BrowsingFragment extends Fragment {
 		
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (isProjectsDirectory) {
-				getActivity().setTitle(getString(R.string.projects));
-//				addNewActionButton(R.drawable.ic_action_info, R.string.info, new OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						Intent showAboutScreen = new Intent(context, AboutActivity.class);
-//						startActivity(showAboutScreen);
-//					}
-//
-//				});
-			} else {
-				getActivity().setTitle(foldername);
-//				addNewActionButton(R.drawable.ic_action_refresh, R.string.refresh, new OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						Intent refreshList = new Intent(context, BrowsingActivity.class);
-//						refreshList.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//						refreshList.putExtra("url", currentUrl);
-//						startActivity(refreshList);
-//					}
-//				});
-			}
+			((BrowsingActivity) getActivity()).setRefreshingState(false);
+			getActivity().setTitle(isProjectsDirectory ? getString(R.string.projects) : foldername);
 		}
 		
 	}
