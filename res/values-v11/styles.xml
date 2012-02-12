@@ -16,12 +16,12 @@
 
 <resources>
 
-    <style name="AppTheme" parent="android:style/Theme.Holo.Light">
+    <style name="ApplicationStyle" parent="android:style/Theme.Holo">
         <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:windowContentOverlay">@drawable/actionbar_shadow</item>
     </style>
 
-    <style name="ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
+    <style name="ActionBar" parent="android:style/Widget.Holo.ActionBar">
         <item name="android:background">@drawable/actionbar_background</item>
         <item name="android:titleTextStyle">@style/ActionBarTitle</item>
         <item name="android:icon">@drawable/icon</item>
@@ -29,6 +29,13 @@
 
     <style name="ActionBarTitle">
         <item name="android:textColor">@color/actionbar_text</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/actionbar_text_shadow</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
     </style>
 
 </resources>
