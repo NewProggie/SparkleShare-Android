@@ -3,6 +3,7 @@ package org.sparkleshare.android;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -42,8 +43,11 @@ public class WelcomeActivity extends FragmentActivity {
 			startActivity(setup);
 			break;
 		case R.id.btn_scan_qrcode:
-			IntentIntegrator integrater = new IntentIntegrator(this);
-			integrater.initiateScan();
+			PackageManager pm = getPackageManager();
+			if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+				IntentIntegrator integrater = new IntentIntegrator(this);
+				integrater.initiateScan();
+			} 
 			break;
 		}
 	}
