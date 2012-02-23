@@ -79,7 +79,7 @@ public class BrowsingAdapter extends BaseAdapter {
 		viewHolder.title.setText(item.getTitle());
 		File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + item.getTitle());
 		if (file.exists()) {
-			viewHolder.subtitle.setText("✔ " + item.getSubtitle());
+			viewHolder.subtitle.setText("\u2714 " + item.getSubtitle());
 		} else {
 			viewHolder.subtitle.setText(item.getSubtitle());
 		}
