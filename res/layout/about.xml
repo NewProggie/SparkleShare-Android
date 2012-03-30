@@ -53,5 +53,4 @@
 		android:layout_marginTop="16dp"
 		android:layout_width="fill_parent"
 		android:text="@string/disclaimer"></TextView>
-	<ImageView android:layout_width="fill_parent" android:src="@drawable/sparkleshare_logo" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/textView4"></ImageView>
 </RelativeLayout>
