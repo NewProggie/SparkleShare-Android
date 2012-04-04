@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
+import android.view.KeyEvent;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -70,4 +71,16 @@ public class WelcomeActivity extends FragmentActivity {
 		}
 	}
 
+	@Override
+	public boolean onKeyDown (int keyCode, KeyEvent event)
+	{
+		switch(keyCode)
+		{
+			case KeyEvent.KEYCODE_MENU:
+			Intent settings = new Intent(this, SettingsActivity.class);
+			startActivity(settings);
+			return true;
+		}
+		return false;
+	}
 }
