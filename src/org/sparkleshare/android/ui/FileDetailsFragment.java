@@ -34,6 +34,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,6 +43,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -53,7 +56,7 @@ public class FileDetailsFragment extends Fragment {
 	private static final String TAG = "FileDetailsFragment";
 	private ImageView fileIcon;
 	private TextView tvFilename, tvFileSize;
-	private Button btnOpenDownloadFile;
+	private Button btnOpenDownloadFile, btnRedownloadFile, btnDeleteFile;
 	private ListEntryItem current;
 	private File file;
 	private String ident, authCode, serverUrl, folderId;
@@ -71,6 +74,9 @@ public class FileDetailsFragment extends Fragment {
 		tvFilename = (TextView) rl.findViewById(R.id.tv_file_name);
 		tvFileSize = (TextView) rl.findViewById(R.id.tv_file_size);
 		btnOpenDownloadFile = (Button) rl.findViewById(R.id.btn_toggle_open_download_file);
+		btnRedownloadFile = (Button) rl.findViewById(R.id.btn_redownload_file);
+		btnDeleteFile = (Button) rl.findViewById(R.id.btn_delete_file);
+		
 		
 		Intent actIntent = getActivity().getIntent();
 		current = actIntent.getParcelableExtra("ListEntryItem");
@@ -82,8 +88,12 @@ public class FileDetailsFragment extends Fragment {
 		file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
 		if (file.exists()) {
 			btnOpenDownloadFile.setText(R.string.open_file);
+			btnRedownloadFile.setVisibility(View.VISIBLE);
+			btnDeleteFile.setVisibility(View.VISIBLE);
 		} else {
 			btnOpenDownloadFile.setText(R.string.download_file);
+			btnRedownloadFile.setVisibility(View.INVISIBLE);
+			btnDeleteFile.setVisibility(View.INVISIBLE);
 		}
 		fileIcon.setImageResource(MimetypeChecker.getLargeIconforMimetype(current.getMimetype()));
 		tvFilename.setText(current.getTitle());
@@ -95,7 +105,13 @@ public class FileDetailsFragment extends Fragment {
 		return current;
 	}
 	
+		
 	public void startAsyncFileDownload() {
+		File file = new File(ExternalDirectory.getExternalRootDirectory() + "/"	+ current.getTitle());
+		if(file.exists() && !file.delete()){
+			return;
+		}
+				
 		StringBuilder sb = new StringBuilder();
 		sb.append(serverUrl);
 		sb.append("/api/getFile/");
@@ -104,7 +120,7 @@ public class FileDetailsFragment extends Fragment {
 		current.setUrl(sb.toString());
 		new DownloadFile().execute(current);
 	}
-	
+		
 	private class DownloadFile extends AsyncTask<ListEntryItem, Integer, Boolean> {
 
 		Notification notification;
@@ -197,10 +213,44 @@ public class FileDetailsFragment extends Fragment {
 			notificationManager.cancel(17);
 			if (result) {
 				btnOpenDownloadFile.setText(R.string.open_file);
+				//btnRedownloadFile.setText(R.string.redownload_file);
+				
 				btnOpenDownloadFile.setEnabled(true);
+				//btnRedownloadFile.setEnabled(true);
+				btnRedownloadFile.setVisibility(View.VISIBLE);
+				btnDeleteFile.setVisibility(View.VISIBLE);
+				
+				File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+				String extension = MimeTypeMap.getFileExtensionFromUrl(current.getTitle());
+
+				if (file.exists() && file.length() < 1000000) {
+					Bitmap fileBitmap;
+					try {
+						 BitmapFactory.Options options = new BitmapFactory.Options();
+						 options.inSampleSize = 4;
+						
+						fileBitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+					} catch (Exception e) {
+						fileBitmap = null;
+					}
+
+					if (fileBitmap != null) {
+						fileIcon.setImageBitmap(fileBitmap);
+					}
+				}
+				
 			} else {
 				Toast.makeText(getActivity(), getString(R.string.downloading_failed), Toast.LENGTH_SHORT).show();
 			}
+		}
+	}
+
+	public void deleteFile() {
+		File file = new File(ExternalDirectory.getExternalRootDirectory() + "/"	+ current.getTitle());
+		if(file.exists() && file.delete()){
+			btnRedownloadFile.setVisibility(View.INVISIBLE);
+			btnDeleteFile.setVisibility(View.INVISIBLE);
+			btnOpenDownloadFile.setText(R.string.download_file);
 		}
 	}
 	
