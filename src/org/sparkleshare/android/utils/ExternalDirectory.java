@@ -30,9 +30,9 @@ public class ExternalDirectory {
 		}
 	}
 	
-	public static void createDirectory(String path){
-		path = URLPathDecoder.decode(path);
-		path = ExternalDirectory.getExternalRootDirectory() + "/" + path;
+	public static void createDirectory(String url){
+		String path = URLPathDecoder.decode(url);
+		path = ExternalDirectory.getExternalRootDirectory() + path;
 		File extDir = new File(path);
 		
 		if(!extDir.exists()){
@@ -40,6 +40,10 @@ public class ExternalDirectory {
 				throw new RuntimeException("Couldn't create external directory");
 			}
 		}
+	}
+	
+	public static String getDownloadTargetPath(String url){
+		return ExternalDirectory.getExternalRootDirectory() + URLPathDecoder.decode(url);
 	}
 	
 	public static boolean isMounted() {
