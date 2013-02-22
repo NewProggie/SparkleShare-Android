@@ -35,8 +35,10 @@ public class ExternalDirectory {
 		path = ExternalDirectory.getExternalRootDirectory() + "/" + path;
 		File extDir = new File(path);
 		
-		if(!extDir.mkdirs()){
-			throw new RuntimeException("Couldn't create external directory");
+		if(!extDir.exists()){
+			if(!extDir.mkdirs()){
+				throw new RuntimeException("Couldn't create external directory");
+			}
 		}
 	}
 	
