@@ -3,6 +3,7 @@ package org.sparkleshare.android.utils;
 import java.io.File;
 
 import android.os.Environment;
+import org.sparkleshare.android.ui.ListEntryItem;
 
 /**
  * Takes care of state of external storage and creates folder structure for downloaded files
@@ -17,7 +18,7 @@ public class ExternalDirectory {
 	 * 
 	 * @return path to external storage
 	 */
-	public static String getExternalRootDirectory() {
+	private static String getExternalRootDirectory() {
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 			File extDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.sparkleshare/");
 			if (extDir.mkdirs() || extDir.exists()) {
@@ -40,8 +41,12 @@ public class ExternalDirectory {
 		}
 	}
 	
-	public static String getDownloadTargetPath(String url){
-		return ExternalDirectory.getExternalRootDirectory() + URLPathDecoder.decode(url);
+	public static String getDownloadTargetPath(ListEntryItem item){
+		if(item.getUrl() == null){
+			return ExternalDirectory.getExternalRootDirectory() + item.getTitle();
+		}
+		
+		return ExternalDirectory.getExternalRootDirectory() + URLPathDecoder.decode(item.getUrl());
 	}
 	
 	public static boolean isMounted() {
