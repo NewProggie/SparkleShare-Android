@@ -40,11 +40,16 @@ public class BrowsingAdapter extends BaseAdapter {
 		if (hideFilesFolders && entry.getTitle().startsWith(".")) {
 			return;
 		} else {
+                    
+                        entry.setFilePath(ExternalDirectory.getDownloadTargetPath(entry.getUrl()));
+                    
+                        if(entry.isDirectory()){
+				ExternalDirectory.createDirectory(entry.getFilePath());
+			}
+                        
 			items.add(entry);
 			Collections.sort(items);
-			if(entry.isDirectory()){
-				ExternalDirectory.createDirectory(entry.getUrl());
-			}
+			
 			notifyDataSetChanged();
 		}
 	}
