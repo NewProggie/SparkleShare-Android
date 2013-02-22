@@ -15,6 +15,7 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 	private String mime;
 	private String mimeBase;
 	private String filesize;
+        private String filePath;
 	private int listviewPosition;
 
 	public ListEntryItem() {
@@ -30,6 +31,7 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		mimeBase = b.getString("mimeBase");
 		filesize = b.getString("filesize");
 		listviewPosition = b.getInt("listviewPosition");
+                filePath = b.getString("filePath");
 	}
 
 	public int getListviewPosition() {
@@ -56,9 +58,26 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		this.filesize = filesize;
 	}
 
+        public void setFilePath(String path) {
+            this.filePath = path;
+        }
+        
+        public String getFilePath() {
+            return this.filePath;
+        }
+        
 	public String getMimetype() {
 		return mime;
 	}
+        
+        public boolean isDirectory() {
+
+            if(type.equals("dir")){
+                return true;
+            }
+            
+            return false;
+        }
 
 	public void setMimetype(String mimetype) {
 		this.mime = mimetype;
@@ -142,6 +161,7 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		b.putString("mimeBase", mimeBase);
 		b.putString("filesize", filesize);
 		b.putInt("listviewPosition", listviewPosition);
+                b.putString("filePath", filePath);
 		dest.writeBundle(b);
 	}
 

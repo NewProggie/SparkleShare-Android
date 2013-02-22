@@ -5,7 +5,6 @@ import java.io.File;
 import org.sparkleshare.android.actionbarcompat.ActionBarActivity;
 import org.sparkleshare.android.ui.FileDetailsFragment;
 import org.sparkleshare.android.ui.ListEntryItem;
-import org.sparkleshare.android.utils.ExternalDirectory;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -37,7 +36,7 @@ public class FileDetailsActivity extends ActionBarActivity {
 
 		FileDetailsFragment fdFragment = (FileDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.filedetails_fragment);
 		ListEntryItem current = fdFragment.getCurrentListItem();
-		File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+		File file = new File(current.getFilePath());
 		String extension = MimeTypeMap.getFileExtensionFromUrl(current.getTitle());
 
 		if (file.exists() && file.length() < 1000000) {
@@ -62,7 +61,7 @@ public class FileDetailsActivity extends ActionBarActivity {
 		String text = btn.getText().toString();
 		FileDetailsFragment fdFragment = (FileDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.filedetails_fragment);
 		ListEntryItem current = fdFragment.getCurrentListItem();
-		File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+		File file = new File(current.getFilePath());
 		if (text.equals(getString(R.string.open_file))) {
 			Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getAbsolutePath()));
 			open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
