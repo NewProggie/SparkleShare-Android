@@ -41,7 +41,7 @@ public class BrowsingAdapter extends BaseAdapter {
 			return;
 		} else {
                     
-                        entry.setFilePath(ExternalDirectory.getDownloadTargetPath(entry.getUrl()));
+                        entry.setFilePath(ExternalDirectory.getDownloadTargetPath(entry));
                     
                         if(entry.isDirectory()){
 				ExternalDirectory.createDirectory(entry.getFilePath());
