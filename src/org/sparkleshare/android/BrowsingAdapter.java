@@ -42,6 +42,9 @@ public class BrowsingAdapter extends BaseAdapter {
 		} else {
 			items.add(entry);
 			Collections.sort(items);
+			if(entry.isDirectory()){
+				ExternalDirectory.createDirectory(entry.getUrl());
+			}
 			notifyDataSetChanged();
 		}
 	}

@@ -30,6 +30,16 @@ public class ExternalDirectory {
 		}
 	}
 	
+	public static void createDirectory(String path){
+		path = URLPathDecoder.decode(path);
+		path = ExternalDirectory.getExternalRootDirectory() + "/" + path;
+		File extDir = new File(path);
+		
+		if(!extDir.mkdirs()){
+			throw new RuntimeException("Couldn't create external directory");
+		}
+	}
+	
 	public static boolean isMounted() {
 		String state = Environment.getExternalStorageState();
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
