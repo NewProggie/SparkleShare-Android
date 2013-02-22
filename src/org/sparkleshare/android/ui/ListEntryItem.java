@@ -31,6 +31,7 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		mimeBase = b.getString("mimeBase");
 		filesize = b.getString("filesize");
 		listviewPosition = b.getInt("listviewPosition");
+                filePath = b.getString("filePath");
 	}
 
 	public int getListviewPosition() {
@@ -160,6 +161,7 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 		b.putString("mimeBase", mimeBase);
 		b.putString("filesize", filesize);
 		b.putInt("listviewPosition", listviewPosition);
+                b.putString("filePath", filePath);
 		dest.writeBundle(b);
 	}
 

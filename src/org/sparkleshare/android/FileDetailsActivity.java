@@ -5,7 +5,6 @@ import java.io.File;
 import org.sparkleshare.android.actionbarcompat.ActionBarActivity;
 import org.sparkleshare.android.ui.FileDetailsFragment;
 import org.sparkleshare.android.ui.ListEntryItem;
-import org.sparkleshare.android.utils.ExternalDirectory;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;

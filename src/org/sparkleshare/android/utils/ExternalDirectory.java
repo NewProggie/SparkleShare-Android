@@ -43,10 +43,10 @@ public class ExternalDirectory {
 	
 	public static String getDownloadTargetPath(ListEntryItem item){
 		if(item.getUrl() == null){
-			return ExternalDirectory.getExternalRootDirectory() + item.getTitle();
+			return ExternalDirectory.getExternalRootDirectory() + "/" + item.getTitle();
 		}
 		
-		return ExternalDirectory.getExternalRootDirectory() + URLPathDecoder.decode(item.getUrl());
+		return ExternalDirectory.getExternalRootDirectory() + "/" + URLPathDecoder.decode(item.getUrl());
 	}
 	
 	public static boolean isMounted() {
