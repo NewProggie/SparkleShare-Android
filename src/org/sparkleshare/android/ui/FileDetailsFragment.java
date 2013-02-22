@@ -85,7 +85,7 @@ public class FileDetailsFragment extends Fragment {
 		authCode = actIntent.getStringExtra("authCode");
 		serverUrl = actIntent.getStringExtra("serverUrl");
 		folderId = actIntent.getStringExtra("folderId");
-		file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+		file = new File(current.getFilePath());
 		if (file.exists()) {
 			btnOpenDownloadFile.setText(R.string.open_file);
 			btnRedownloadFile.setVisibility(View.VISIBLE);
@@ -107,7 +107,7 @@ public class FileDetailsFragment extends Fragment {
 	
 		
 	public void startAsyncFileDownload() {
-		File file = new File(ExternalDirectory.getExternalRootDirectory() + "/"	+ current.getTitle());
+		File file = new File(current.getFilePath());
 		if(file.exists() && !file.delete()){
 			return;
 		}
@@ -169,8 +169,7 @@ public class FileDetailsFragment extends Fragment {
 					if (entity != null) {
 						notification.contentView.setTextViewText(R.id.tv_download_title, current.getTitle());
 						notificationManager.notify(17, notification);
-						File file = new File(ExternalDirectory.getExternalRootDirectory() + "/"
-								+ current.getTitle());
+						File file = new File(current.getFilePath());
 						maxProgress = Integer.valueOf(current.getFilesize());
 						InputStream input = entity.getContent();
 						OutputStream output = new FileOutputStream(file);
@@ -220,7 +219,7 @@ public class FileDetailsFragment extends Fragment {
 				btnRedownloadFile.setVisibility(View.VISIBLE);
 				btnDeleteFile.setVisibility(View.VISIBLE);
 				
-				File file = new File(ExternalDirectory.getExternalRootDirectory() + "/" + current.getTitle());
+				File file = new File(current.getFilePath());
 				String extension = MimeTypeMap.getFileExtensionFromUrl(current.getTitle());
 
 				if (file.exists() && file.length() < 1000000) {
@@ -246,7 +245,7 @@ public class FileDetailsFragment extends Fragment {
 	}
 
 	public void deleteFile() {
-		File file = new File(ExternalDirectory.getExternalRootDirectory() + "/"	+ current.getTitle());
+		File file = new File(current.getFilePath());
 		if(file.exists() && file.delete()){
 			btnRedownloadFile.setVisibility(View.INVISIBLE);
 			btnDeleteFile.setVisibility(View.INVISIBLE);
