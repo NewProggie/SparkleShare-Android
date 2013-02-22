@@ -59,6 +59,15 @@ public class ListEntryItem implements Comparable<ListEntryItem>, Parcelable {
 	public String getMimetype() {
 		return mime;
 	}
+        
+        public boolean isDirectory() {
+        
+            if(type.equals("dir")){
+                return true;
+            }
+            
+            return false;
+        }
 
 	public void setMimetype(String mimetype) {
 		this.mime = mimetype;
