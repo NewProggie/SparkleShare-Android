@@ -30,9 +30,7 @@ public class ExternalDirectory {
 		}
 	}
 	
-	public static void createDirectory(String url){
-		String path = URLPathDecoder.decode(url);
-		path = ExternalDirectory.getExternalRootDirectory() + path;
+	public static void createDirectory(String path){
 		File extDir = new File(path);
 		
 		if(!extDir.exists()){
